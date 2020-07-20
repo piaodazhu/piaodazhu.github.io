@@ -76,11 +76,15 @@
     			
             
     			
-    			<a q-on="click: openSlider(e, 'friends')" href="javascript:void(0)">友链</a>
+    			<a q-on="click: openSlider(e, 'friends')" href="javascript:void(0)">友情链接</a>
     			
             
     			
-    			<a q-on="click: openSlider(e, 'aboutme')" href="javascript:void(0)">关于我</a>
+    			<a q-on="click: openSlider(e, 'lookup')" href="javascript:void(0)">快速学习</a>
+    			
+            
+    			
+    			<a q-on="click: openSlider(e, 'aboutme')" href="javascript:void(0)">关于</a>
     			
             
 		</nav>
@@ -532,21 +536,29 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
       
       
     
+      
+      
+      
+    
     
 
     <ul style="width: 70%">
     
     
       
-      <li style="width: 33.333333333333336%" q-on="click: openSlider(e, 'innerArchive')"><a href="javascript:void(0)" q-class="active:innerArchive">所有文章</a></li>
+      <li style="width: 25%" q-on="click: openSlider(e, 'innerArchive')"><a href="javascript:void(0)" q-class="active:innerArchive">所有文章</a></li>
       
         
       
-      <li style="width: 33.333333333333336%" q-on="click: openSlider(e, 'friends')"><a href="javascript:void(0)" q-class="active:friends">友链</a></li>
+      <li style="width: 25%" q-on="click: openSlider(e, 'friends')"><a href="javascript:void(0)" q-class="active:friends">友情链接</a></li>
       
         
       
-      <li style="width: 33.333333333333336%" q-on="click: openSlider(e, 'aboutme')"><a href="javascript:void(0)" q-class="active:aboutme">关于我</a></li>
+      <li style="width: 25%" q-on="click: openSlider(e, 'lookup')"><a href="javascript:void(0)" q-class="active:lookup">快速学习</a></li>
+      
+        
+      
+      <li style="width: 25%" q-on="click: openSlider(e, 'aboutme')"><a href="javascript:void(0)" q-class="active:aboutme">关于</a></li>
       
         
     </ul>
@@ -599,6 +611,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">c</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Makefile</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">ubuntu</a>
               </li>
              
@@ -612,14 +632,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">科学上网</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">c</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Makefile</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -687,14 +699,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
         <ul class="search-ul">
           
             <li class="search-li">
-              <a href="https://leetcode-cn.com/problemset/all/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>leetcode刷题</a>
-            </li>
-          
-            <li class="search-li">
-              <a href="https://python123.io/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>python123学习</a>
-            </li>
-          
-            <li class="search-li">
               <a href="http://www.bit.edu.cn/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>欢迎报考北京理工大学</a>
             </li>
           
@@ -707,19 +711,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
             </li>
           
             <li class="search-li">
-              <a href="https://www.runoob.com/linux/linux-command-manual.html" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>Linux菜鸟教程</a>
+              <a href="http://kerneltravel.net/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>大佬博客linux内核之旅</a>
             </li>
           
             <li class="search-li">
-              <a href="https://wallhaven.cc/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>高质量Wallpaper</a>
-            </li>
-          
-            <li class="search-li">
-              <a href="http://www.cplusplus.com/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>c++参考网站</a>
-            </li>
-          
-            <li class="search-li">
-              <a href="https://c.runoob.com/front-end/854" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>正则表达式在线测试</a>
+              <a href="https://windliang.wang/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>大佬博客windliang</a>
             </li>
           
         </ul>
@@ -730,7 +726,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
     
     	<section class="tools-section tools-section-me" q-show="aboutme">
   	  	
-  	  		<div class="aboutme-wrap" id="js-aboutme">道路千万条&lt;br&gt;备份第一条&lt;br&gt;备份不规范&lt;br&gt;博客全完蛋&lt;br&gt;&lt;br&gt;——记2020-07-13重大丢失事件</div>
+  	  		<div class="aboutme-wrap" id="js-aboutme">道路千万条&lt;br&gt;备份第一条&lt;br&gt;备份不规范&lt;br&gt;博客全完蛋&lt;br&gt;&lt;br&gt;——记2020-07-13重大数据丢失事件</div>
   	  	
     	</section>
     
