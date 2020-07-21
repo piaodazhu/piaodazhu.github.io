@@ -6,22 +6,21 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://piaodazhu.github.io">
-  <title>Makefile基础 | PDZ</title>
+  <title>8-test | PDZ</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="本文用以记录基本的Makefile写法，仅作为学习记录">
+  <meta name="description" content="TEST">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Makefile基础">
-<meta property="og:url" content="https://piaodazhu.github.io/6-Makefile-basic/index.html">
+<meta property="og:title" content="8-test">
+<meta property="og:url" content="https://piaodazhu.github.io/8-test/index.html">
 <meta property="og:site_name" content="PDZ">
-<meta property="og:description" content="本文用以记录基本的Makefile写法，仅作为学习记录">
+<meta property="og:description" content="TEST">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-07-16T00:55:21.000Z">
-<meta property="article:modified_time" content="2020-07-16T02:18:34.646Z">
+<meta property="og:image" content="https://piaodazhu.github.io/tree.tar.gz">
+<meta property="article:published_time" content="2020-07-21T11:02:14.000Z">
+<meta property="article:modified_time" content="2020-07-21T11:04:07.021Z">
 <meta property="article:author" content="PDZ">
-<meta property="article:tag" content="linux">
-<meta property="article:tag" content="c">
-<meta property="article:tag" content="Makefile">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://piaodazhu.github.io/tree.tar.gz">
   
     <link rel="alternative" href="/atom.xml" title="PDZ" type="application/atom+xml">
   
@@ -157,20 +156,20 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-6-Makefile-basic" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-8-test" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      Makefile基础
+      8-test
     </h1>
   
 
         
-        <a href="/6-Makefile-basic/" class="archive-article-date">
-  	<time datetime="2020-07-16T00:55:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-16</time>
+        <a href="/8-test/" class="archive-article-date">
+  	<time datetime="2020-07-21T11:02:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-21</time>
 </a>
 
         <!-- 开始添加字数统计-->
@@ -180,7 +179,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-keyboard-o"></i>
         <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">1k字</span>
+        <span class="post-count">1字</span>
       </span>
     </span>
 
@@ -189,7 +188,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-hourglass-half"></i>
         <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">4分</span>
+        <span class="post-count">1分</span>
       </span>
     </span>
 </div>
@@ -214,87 +213,7 @@
         
 
 
-        <blockquote>
-<p>本文用以记录基本的Makefile写法，仅作为学习记录</p>
-</blockquote>
-<a id="more"></a>
-
-<h2 id="Makefile-基本规则"><a href="#Makefile-基本规则" class="headerlink" title="Makefile 基本规则"></a>Makefile 基本规则</h2><h3 id="基本结构"><a href="#基本结构" class="headerlink" title="基本结构"></a>基本结构</h3><p>Makefile可以用于管理多文件编译时源文件的处理步骤。对于带有Makefile的项目，当某个源文件有修改时，只需要重新发起一次make命令，而无须手动寻找依赖它的源文件并重新编译。基本的Makefile语句具有如下结构：</p>
-<blockquote>
-<p>Target: Prerequisite1 Prerequisite2 …</p>
-<p>​    command                                                </p>
-<p>欲更新目标Target，首先必须更新条件Prequisite，所谓“更新”就是执行一次命令列表command。命令列表必须以Tab开头。</p>
-</blockquote>
-<h3 id="clean-目标"><a href="#clean-目标" class="headerlink" title="clean 目标"></a>clean 目标</h3><p>通常需要写一个clean目标，来统一清除编译产生了的二进制文件。加入恰好文件夹下有个叫clean的文件，则发起make clean会无法正确执行清除。为此需要再加一句话，使clean被优先当作规则执行。</p>
-<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">clean:</span></span><br><span class="line">	@echo <span class="string">"cleanning projetct"</span></span><br><span class="line">	-rm main *.o</span><br><span class="line">	@echo <span class="string">"clean complete"</span></span><br><span class="line">	</span><br><span class="line"><span class="section">.PHNOY: clean</span></span><br></pre></td></tr></table></figure>
-
-<p>命令前面的”@”和”-“具有特殊含义：</p>
-<ul>
-<li>命令前面加@，不会显示命令本身，而只显示命令的结果</li>
-<li>命令前面加 - ，即使本条命令出错，make不会报错退出，而继续执行后面的命令</li>
-</ul>
-<p>有时候需要清理的文件可能不存在，rm前加一个”-“就很有效果。</p>
-<h3 id="缺省目标"><a href="#缺省目标" class="headerlink" title="缺省目标"></a>缺省目标</h3><p>常用的缺省目标包括：</p>
-<ul>
-<li>all，执行主要的编译工作</li>
-<li>install，执行编译后的安装工作，把可执行文件、配置文件、文档等分别铐到不同安装目录</li>
-<li>clean，上面有</li>
-<li>distclean，除了编译生成的二进制文件，也删除配置文件和格式转化后的文档，只留源文件</li>
-</ul>
-<h2 id="隐含规则与变量"><a href="#隐含规则与变量" class="headerlink" title="隐含规则与变量"></a>隐含规则与变量</h2><h3 id="隐含规则"><a href="#隐含规则" class="headerlink" title="隐含规则"></a>隐含规则</h3><p>命令make -p可以查看所有的隐含规则。常见的几个隐含规则：</p>
-<ul>
-<li>输出可执行二进制文件名默认为Target的名字</li>
-<li>CC = cc，指向gcc</li>
-<li>COMPILE.c = $(CC) $(CFLAGS) $(CPPFLAGS) $(TARGET_ARCH) -c，用于执行c编译命令</li>
-<li>目标为xxx.o的规则下，可以不写出xxx.c，只写头文件条件</li>
-</ul>
-<h3 id="默认变量"><a href="#默认变量" class="headerlink" title="默认变量"></a>默认变量</h3><p>常见的默认变量：</p>
-<ul>
-<li>$@，规则中的Target</li>
-<li>$&lt;，规则中第一个Prerequisite</li>
-<li>$?，规则中所有比Target新的条件，组成了以space分隔列表</li>
-<li>$^，规则中的所有Prerequisite，以space分隔</li>
-<li>AR，ar用于静态库打包<ul>
-<li>ARFLAGS，打包命令选项</li>
-</ul>
-</li>
-<li>CC，cc指向gcc，编译器名称<ul>
-<li>CFLAGS，编译器选项，可以make CFLAGS=-g方便调试</li>
-</ul>
-</li>
-<li>CXX，C++编译器g++<ul>
-<li>CXXFLAGS，c++编译器选项</li>
-</ul>
-</li>
-<li>CPP，c预处理器cpp<ul>
-<li>CPPFLAGS，预处理器选项</li>
-</ul>
-</li>
-<li>OUTPUT——OPTION，输出的命令行选项，缺省是 -o $@</li>
-</ul>
-<h3 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h3><p>可以自己定义变量并运用。感觉和bash中的变量差不多，是字符串的形式。用法也有点宏定义的感觉，可以展开放到command里：</p>
-<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">foo=yes</span><br><span class="line">bar=<span class="variable">$(foo)</span></span><br><span class="line">foo=no</span><br><span class="line"></span><br><span class="line"><span class="section">test:</span></span><br><span class="line">	@echo <span class="variable">$(bar)</span></span><br></pre></td></tr></table></figure>
-
-<p>上面执行make test之后得到 no。证明foo没有立即展开，而是执行展开$(bar)是展开的。如果要立即展开，可以加个冒号：</p>
-<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">foo=yes</span><br><span class="line">bar:=<span class="variable">$(foo)</span>    </span><br><span class="line">foo=no</span><br><span class="line"></span><br><span class="line"><span class="section">test:</span></span><br><span class="line">	@echo <span class="variable">$(bar)</span></span><br></pre></td></tr></table></figure>
-
-<p>第二行略作修改，结果变为yes了。</p>
-<h2 id="自动处理依赖"><a href="#自动处理依赖" class="headerlink" title="自动处理依赖"></a>自动处理依赖</h2><p>在bash中调用下面语句可以获得某个c文件与头文件的依赖关系：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc -MM xxx.c</span><br></pre></td></tr></table></figure>
-
-<p>要把这种规则写入Makefile，可以加入下面一段(<em>不明白这有什么必要性？为什么不直接用上面方法</em>)：</p>
-<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">sources = xxx1.c xxx2.c xxx3.c</span><br><span class="line"></span><br><span class="line"><span class="keyword">include</span> $(sources:.c=.d)</span><br><span class="line"></span><br><span class="line"><span class="section">%.d: %.c </span></span><br><span class="line">    set -e; rm -f <span class="variable">$@</span>; \</span><br><span class="line">    <span class="variable">$(CC)</span> -MM <span class="variable">$(CPPFLAGS)</span> <span class="variable">$&lt;</span> &gt; <span class="variable">$@</span>.$$$$; \</span><br><span class="line">    sed 's,\(<span class="variable">$*</span>\)\.o[ :]*,\1.o <span class="variable">$@</span> : ,g' &lt; <span class="variable">$@</span>.$$$$ &gt; <span class="variable">$@</span>; \</span><br><span class="line">    rm -f <span class="variable">$@</span>.$$$$</span><br></pre></td></tr></table></figure>
-
-<p>注意<strong>$$$$=$$=PID</strong>。</p>
-<p>这里的作用还须慢慢体会。</p>
-<h2 id="make命令的选项"><a href="#make命令的选项" class="headerlink" title="make命令的选项"></a>make命令的选项</h2><ul>
-<li>-p，打印隐含规则</li>
-<li>-n，展示要执行的命令，而不真的执行，用于检查</li>
-<li>-C，支持切换到另一个目录下对当前目录进行make操作</li>
-<li>make之前，可以用=或者:=定义变量</li>
-</ul>
-<h2 id="makefile举例"><a href="#makefile举例" class="headerlink" title="makefile举例"></a>makefile举例</h2><figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">all: main</span></span><br><span class="line"></span><br><span class="line"><span class="section">main: main.o stack.o maze.o</span></span><br><span class="line">    gcc <span class="variable">$^</span> -o <span class="variable">$@</span></span><br><span class="line"></span><br><span class="line"><span class="section">main.o: main.h stack.h maze.h</span></span><br><span class="line"><span class="section">stack.o: stack.h main.h</span></span><br><span class="line"><span class="section">maze.o: maze.h main.h</span></span><br><span class="line"></span><br><span class="line"><span class="section">clean:</span></span><br><span class="line">    -rm main *.o</span><br><span class="line"></span><br><span class="line"><span class="meta"><span class="meta-keyword">.PHONY</span>: clean</span></span><br><span class="line"></span><br><span class="line">sources = main.c stack.c maze.c</span><br><span class="line"></span><br><span class="line"><span class="keyword">include</span> $(sources:.c=.d)</span><br><span class="line"></span><br><span class="line"><span class="section">%.d: %.c </span></span><br><span class="line">    set -e; rm -f <span class="variable">$@</span>; \</span><br><span class="line">    <span class="variable">$(CC)</span> -MM <span class="variable">$(CPPFLAGS)</span> <span class="variable">$&lt;</span> &gt; <span class="variable">$@</span>.$$$$; \</span><br><span class="line">    sed 's,\(<span class="variable">$*</span>\)\.o[ :]*,\1.o <span class="variable">$@</span> : ,g' &lt; <span class="variable">$@</span>.$$$$ &gt; <span class="variable">$@</span>; \</span><br><span class="line">    rm -f <span class="variable">$@</span>.$$$$</span><br><span class="line">    </span><br><span class="line">foo=yes</span><br><span class="line">bar:=<span class="variable">$(foo)</span></span><br><span class="line">foo=no</span><br><span class="line"><span class="section">test:</span></span><br><span class="line">    @echo <span class="variable">$(bar)</span></span><br></pre></td></tr></table></figure>
-
+        <h1 id="TEST"><a href="#TEST" class="headerlink" title="TEST"></a>TEST</h1><p><img src="https://piaodazhu.github.io/tree.tar.gz" alt="link"></p>
 
     
 
@@ -309,25 +228,6 @@
     <div class="article-info article-info-index">
       
       
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">linux</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">c</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Makefile</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
       
 
       
@@ -378,7 +278,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://piaodazhu.github.io/6-Makefile-basic/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=https://piaodazhu.github.io/8-test/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -392,18 +292,9 @@
   
 <nav id="article-nav">
   
-    <a href="/7-Makefile-further/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          进一步学习Makefile：源文件在多文件夹下的编译管理
-        
-      </div>
-    </a>
   
-  
-    <a href="/5-Ubuntu-fast-cross-GFW/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">科学上网小技巧：利用shell脚本光速启动或停止clash</div>
+    <a href="/7-Makefile-further/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">进一步学习Makefile：源文件在多文件夹下的编译管理</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -430,7 +321,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Makefile-基本规则"><span class="toc-number">1.</span> <span class="toc-text">Makefile 基本规则</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#基本结构"><span class="toc-number">1.1.</span> <span class="toc-text">基本结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#clean-目标"><span class="toc-number">1.2.</span> <span class="toc-text">clean 目标</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#缺省目标"><span class="toc-number">1.3.</span> <span class="toc-text">缺省目标</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#隐含规则与变量"><span class="toc-number">2.</span> <span class="toc-text">隐含规则与变量</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#隐含规则"><span class="toc-number">2.1.</span> <span class="toc-text">隐含规则</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#默认变量"><span class="toc-number">2.2.</span> <span class="toc-text">默认变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#变量"><span class="toc-number">2.3.</span> <span class="toc-text">变量</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#自动处理依赖"><span class="toc-number">3.</span> <span class="toc-text">自动处理依赖</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#make命令的选项"><span class="toc-number">4.</span> <span class="toc-text">make命令的选项</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#makefile举例"><span class="toc-number">5.</span> <span class="toc-text">makefile举例</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#TEST"><span class="toc-number">1.</span> <span class="toc-text">TEST</span></a></li></ol>
                     </div>
                 </span>
             </div>
