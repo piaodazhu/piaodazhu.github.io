@@ -6,18 +6,23 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://piaodazhu.github.io">
-  <title>8-test | PDZ</title>
+  <title>绝版程序源码：the tree processor | PDZ</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="TESTlink">
+  <meta name="description" content="The Tree Processor 是Greg Lee编写的将符合一定规则的字符串转化为树状图的程序。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="8-test">
-<meta property="og:url" content="https://piaodazhu.github.io/8-test/index.html">
+<meta property="og:title" content="绝版程序源码：the tree processor">
+<meta property="og:url" content="https://piaodazhu.github.io/8-the-tree-processor-code/index.html">
 <meta property="og:site_name" content="PDZ">
-<meta property="og:description" content="TESTlink">
+<meta property="og:description" content="The Tree Processor 是Greg Lee编写的将符合一定规则的字符串转化为树状图的程序。">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-07-21T11:02:14.000Z">
-<meta property="article:modified_time" content="2020-07-21T11:14:40.561Z">
+<meta property="article:published_time" content="2020-07-21T11:17:03.000Z">
+<meta property="article:modified_time" content="2020-07-21T12:11:02.848Z">
 <meta property="article:author" content="PDZ">
+<meta property="article:tag" content="数据结构">
+<meta property="article:tag" content="c">
+<meta property="article:tag" content="树">
+<meta property="article:tag" content="code">
+<meta property="article:tag" content="非原创">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="PDZ" type="application/atom+xml">
@@ -154,20 +159,20 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-8-test" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-8-the-tree-processor-code" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      8-test
+      绝版程序源码：the tree processor
     </h1>
   
 
         
-        <a href="/8-test/" class="archive-article-date">
-  	<time datetime="2020-07-21T11:02:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-21</time>
+        <a href="/8-the-tree-processor-code/" class="archive-article-date">
+  	<time datetime="2020-07-21T11:17:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-21</time>
 </a>
 
         <!-- 开始添加字数统计-->
@@ -177,7 +182,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-keyboard-o"></i>
         <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">1字</span>
+        <span class="post-count">1.1k字</span>
       </span>
     </span>
 
@@ -186,7 +191,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-hourglass-half"></i>
         <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">1分</span>
+        <span class="post-count">5分</span>
       </span>
     </span>
 </div>
@@ -211,7 +216,34 @@
         
 
 
-        <h1 id="TEST"><a href="#TEST" class="headerlink" title="TEST"></a>TEST</h1><p><a href="https://piaodazhu.github.io/myfiles/tree.tar.gz">link</a></p>
+        <blockquote>
+<p>The Tree Processor 是Greg Lee编写的将符合一定规则的字符串转化为树状图的程序。</p>
+</blockquote>
+<a id="more"></a>
+
+<h3 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h3><p>The Tree Processor 能将树的形状可视化，对数据结构的学习有所帮助。但由于种种原因，原作者Greg Lee给出的下载地址已经失效。我在国内网络中搜索，发现几乎找不到能免费下载到该程序的网站。最后在某网站上找到了程序源码，但需要充钱才能下载。上传代码的作者显然不是程序的原作者。不知是作者想以此牟利，还是该网站的机制所致，我认为这是一种恰烂钱的行为。于是我花钱下载了源码之后，放到个人博客下，有缘人可自取，若原作者认为侵权可邮件联系我<a href="mailto:2283079466@qq.com">2283079466@qq.com</a>删除。</p>
+<p>在此向原作者Greg Lee表达敬意。</p>
+<h3 id="下载链接"><a href="#下载链接" class="headerlink" title="下载链接"></a>下载链接</h3><p><a href="https://piaodazhu.github.io/myfiles/tree.tar.gz">The Tree Processor Sourcecode</a></p>
+<h3 id="使用方式"><a href="#使用方式" class="headerlink" title="使用方式"></a>使用方式</h3><p>可以启动程序 tree，按照 *<em>\tree (root(left)(right)) *</em>的格式输入字符串，即可转化树形结构。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">lzhx@lzhx-virtual-machine:~/cppprogram/tree/sorttree/tree$ ./tree   <span class="comment">#启动</span></span><br><span class="line">\tree (3(4(5)(6))(7(8)(9)))           <span class="comment">#输入</span></span><br><span class="line">    3</span><br><span class="line"> ___|___</span><br><span class="line"> |     |</span><br><span class="line"> 4     7</span><br><span class="line">_|__  _|__</span><br><span class="line">|  |  |  |</span><br><span class="line">5  6  8  9</span><br><span class="line">\tree (a(b()())(c()(e)))              <span class="comment">#输入</span></span><br><span class="line">    a</span><br><span class="line"> ___|___</span><br><span class="line"> |     |</span><br><span class="line"> b     c</span><br><span class="line">_|__  _|__</span><br><span class="line">|  |  |  |</span><br><span class="line">         e</span><br></pre></td></tr></table></figure>
+
+<p>也可以采用输出重定向的方式，将先序遍历的结果作为tree的输入，示例如下：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line">lzhx@lzhx-virtual-machine:~/cppprogram/tree/sorttree$ ./main | ./tree/tree </span><br><span class="line">	     45</span><br><span class="line">          ___|___</span><br><span class="line">          |     |</span><br><span class="line">          34    50</span><br><span class="line">         _|__  _|__</span><br><span class="line">         |  |  |  |</span><br><span class="line">         21       55</span><br><span class="line">        _|__     _|__</span><br><span class="line">        |  |     |  |</span><br><span class="line">                    90</span><br><span class="line">                   _|__</span><br><span class="line">                   |  |</span><br><span class="line"></span><br><span class="line">delete 50 <span class="keyword">in</span> tree</span><br><span class="line">	     45</span><br><span class="line">          ___|___</span><br><span class="line">          |     |</span><br><span class="line">          34    55</span><br><span class="line">         _|__  _|__</span><br><span class="line">         |  |  |  |</span><br><span class="line">         21       90</span><br><span class="line">        _|__     _|__</span><br><span class="line">        |  |     |  |</span><br><span class="line"></span><br><span class="line">delete 34 <span class="keyword">in</span> tree</span><br><span class="line">	    45</span><br><span class="line">         ___|___</span><br><span class="line">         |     |</span><br><span class="line">         21    55</span><br><span class="line">        _|__  _|__</span><br><span class="line">        |  |  |  |</span><br><span class="line">                 90</span><br><span class="line">                _|__</span><br><span class="line">                |  |</span><br><span class="line"></span><br><span class="line">delete 45 <span class="keyword">in</span> tree</span><br><span class="line">	 21</span><br><span class="line">        _|__</span><br><span class="line">        |  |</span><br><span class="line">           55</span><br><span class="line">          _|__</span><br><span class="line">          |  |</span><br><span class="line">             90</span><br><span class="line">            _|__</span><br><span class="line">            |  |</span><br><span class="line"></span><br><span class="line">delete 90 <span class="keyword">in</span> tree</span><br><span class="line">	 21</span><br><span class="line">        _|__</span><br><span class="line">        |  |</span><br><span class="line">           55</span><br><span class="line">          _|__</span><br><span class="line">          |  |</span><br><span class="line"></span><br><span class="line">delete 55 <span class="keyword">in</span> tree</span><br><span class="line">	 21</span><br><span class="line">        _|__</span><br><span class="line">        |  |</span><br><span class="line"></span><br><span class="line">delete 21 <span class="keyword">in</span> tree</span><br></pre></td></tr></table></figure>
+
+<p>其中main函数的源码：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*main.c*/</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;time.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"bst.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> RANGE 100</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> N 6</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">print_item</span><span class="params">(link p)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d"</span>, p-&gt;item);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i,key;</span><br><span class="line">    link root = <span class="literal">NULL</span>;</span><br><span class="line">    srand(time(<span class="literal">NULL</span>));</span><br><span class="line">    <span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; N; i++)</span><br><span class="line">        root = insert(root, rand() % RANGE);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"\t\\tree"</span>);</span><br><span class="line">    print_tree(root);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"\n\n"</span>);</span><br><span class="line">    <span class="keyword">while</span>(root) &#123;</span><br><span class="line">        key = rand() % RANGE;</span><br><span class="line">        <span class="keyword">if</span>(search(root, key)) &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"delete %d in tree\n"</span>, key);</span><br><span class="line">            root = <span class="keyword">delete</span>(root, key);</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"\t\\tree"</span>);</span><br><span class="line">            print_tree(root);</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"\n\n"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;   </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*bst.h*/</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> BST_H</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> BST_H</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">node</span> *<span class="title">link</span>;</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">node</span> &#123;</span></span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">char</span> item;</span><br><span class="line">    link left, right;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function">link <span class="title">search</span><span class="params">(link t, <span class="keyword">unsigned</span> <span class="keyword">char</span> key)</span></span>;</span><br><span class="line"><span class="function">link <span class="title">insert</span><span class="params">(link t, <span class="keyword">unsigned</span> <span class="keyword">char</span> key)</span></span>;</span><br><span class="line"><span class="function">link <span class="title">delete</span><span class="params">(link t, <span class="keyword">unsigned</span> <span class="keyword">char</span> key)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">print_tree</span><span class="params">(link t)</span></span>; </span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*bst.c*/</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"bst.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">static</span> link <span class="title">make_node</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">char</span> item)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    link p = <span class="built_in">malloc</span>(<span class="keyword">sizeof</span> *p);</span><br><span class="line">    p-&gt;item = item;</span><br><span class="line">    p-&gt;left = p-&gt;right =  <span class="literal">NULL</span>;</span><br><span class="line">    <span class="keyword">return</span> p;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">free_node</span><span class="params">(link p)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">free</span>(p);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">link <span class="title">search</span><span class="params">(link t, <span class="keyword">unsigned</span> <span class="keyword">char</span> key)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    link p = t;</span><br><span class="line">    <span class="keyword">while</span>(p) &#123;</span><br><span class="line">        <span class="keyword">if</span>(p-&gt;item == key) <span class="keyword">return</span> p;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(p-&gt;item &gt; key) p = p-&gt;left;</span><br><span class="line">        <span class="keyword">else</span> p = p-&gt;right;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">link <span class="title">insert</span><span class="params">(link t, <span class="keyword">unsigned</span> <span class="keyword">char</span> key)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    link p = t;</span><br><span class="line">    <span class="keyword">if</span>(!t) <span class="keyword">return</span> make_node(key);</span><br><span class="line">    <span class="keyword">while</span>(<span class="number">1</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span>(p-&gt;item == key) <span class="keyword">return</span> t;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(p-&gt;item &gt; key) &#123;</span><br><span class="line">            <span class="keyword">if</span>(p-&gt;left) p = p-&gt;left;</span><br><span class="line">            <span class="keyword">else</span> &#123;</span><br><span class="line">                p-&gt;left = make_node(key);</span><br><span class="line">                <span class="keyword">return</span> t;</span><br><span class="line">                &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">if</span>(p-&gt;right) p = p-&gt;right;</span><br><span class="line">            <span class="keyword">else</span> &#123;</span><br><span class="line">                p-&gt;right = make_node(key);</span><br><span class="line">                <span class="keyword">return</span> t;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">link <span class="title">delete</span><span class="params">(link t, <span class="keyword">unsigned</span> <span class="keyword">char</span> key)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    link p;</span><br><span class="line">    <span class="keyword">if</span>(!t) <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(t-&gt;item &gt; key)</span><br><span class="line">        t-&gt;left = <span class="keyword">delete</span>(t-&gt;left, key);</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(t-&gt;item &lt; key)</span><br><span class="line">        t-&gt;right = <span class="keyword">delete</span>(t-&gt;right, key);</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">if</span>(t-&gt;left == <span class="literal">NULL</span> &amp;&amp; t-&gt;right == <span class="literal">NULL</span>) &#123;</span><br><span class="line">            free_node(t);</span><br><span class="line">            t = <span class="literal">NULL</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(t-&gt;left) &#123;</span><br><span class="line">            <span class="keyword">for</span>(p = t-&gt;left; p-&gt;right; p = p-&gt;right);</span><br><span class="line">            t-&gt;item = p-&gt;item;</span><br><span class="line">            t-&gt;left = <span class="keyword">delete</span>(t-&gt;left, t-&gt;item);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">for</span>(p = t-&gt;right; p-&gt;left; p = p-&gt;left);</span><br><span class="line">            t-&gt;item = p-&gt;item;</span><br><span class="line">            t-&gt;right = <span class="keyword">delete</span>(t-&gt;right, t-&gt;item);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> t;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">print_tree</span><span class="params">(link t)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(t) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"("</span>);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d"</span>, t-&gt;item);</span><br><span class="line">        print_tree(t-&gt;left);</span><br><span class="line">        print_tree(t-&gt;right);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">")"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="built_in">printf</span>(<span class="string">"()"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//程序改编自《Linux C编程一站式学习》——宋劲杉</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h3><p>注意在C语言中删除链表或者树的节点时，不可采用下面形式：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//假设要删除p节点，link是指向结构Node的指针</span></span><br><span class="line">link q = p;</span><br><span class="line">p = p-&gt;next;</span><br><span class="line"><span class="built_in">free</span>(q);</span><br></pre></td></tr></table></figure>
+
+<p>上面的程序是<strong>无法删除p节点</strong>的！</p>
+<p>而它却出现在了严蔚敏老师的《数据结构与算法》中，本书虽然说是C语言描述，却多次应用到了C++中的引用&amp;，所以不可直接照搬程序到C语言。要删除某节点，简单的方法是要如下操作：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//假设删除p节点，link是指向结构Node的指针，t指向p节点的前驱节点。</span></span><br><span class="line">link q = p;</span><br><span class="line">t-&gt;next = p-&gt;next;</span><br><span class="line"><span class="built_in">free</span>(q);</span><br></pre></td></tr></table></figure>
+
 
     
 
@@ -226,6 +258,33 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">c</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">树</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">code</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">非原创</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
@@ -276,7 +335,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://piaodazhu.github.io/8-test/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=https://piaodazhu.github.io/8-the-tree-processor-code/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -319,7 +378,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#TEST"><span class="toc-number">1.</span> <span class="toc-text">TEST</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#说明"><span class="toc-number">1.</span> <span class="toc-text">说明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#下载链接"><span class="toc-number">2.</span> <span class="toc-text">下载链接</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用方式"><span class="toc-number">3.</span> <span class="toc-text">使用方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#写在最后"><span class="toc-number">4.</span> <span class="toc-text">写在最后</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -537,6 +596,18 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">索引数组</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">树</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">code</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">非原创</a>
               </li>
             
             <div class="clearfix"></div>
