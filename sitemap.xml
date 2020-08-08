@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://piaodazhu.github.io/14-leetcode-Random-Pick-with-Blacklist/</loc>
+    
+    <lastmod>2020-08-08T04:31:59.040Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://piaodazhu.github.io/13-leetcode-rob-3-down-to-up/</loc>
     
     <lastmod>2020-08-05T12:07:42.584Z</lastmod>
