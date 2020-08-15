@@ -6,22 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://piaodazhu.github.io">
-  <title>leetcode题目：“马”在棋盘上的概率 | PDZ</title>
+  <title>浮点数基础知识 | PDZ</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="题目大意给定一个N×N的棋盘，横纵坐标范围均在[0, N-1]，给定马的起始坐标(r, c)，给定移动次数K。要求返回经过K次移动之后，马仍在在棋盘上的概率。 马的移动规律同中国象棋(走斜”日”)，且假定初始状态马一定在棋盘上。N的范围在[1, 25]，K的范围在[0，100]。">
+  <meta name="description" content="本文记录关于浮点数的基础知识，重点参考IEEE 754标准对浮点数的规定。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="leetcode题目：“马”在棋盘上的概率">
-<meta property="og:url" content="https://piaodazhu.github.io/1-leetcode-Knight-Probability-in-Chessboard/index.html">
+<meta property="og:title" content="浮点数基础知识">
+<meta property="og:url" content="https://piaodazhu.github.io/15-floating-point-number-basic/index.html">
 <meta property="og:site_name" content="PDZ">
-<meta property="og:description" content="题目大意给定一个N×N的棋盘，横纵坐标范围均在[0, N-1]，给定马的起始坐标(r, c)，给定移动次数K。要求返回经过K次移动之后，马仍在在棋盘上的概率。 马的移动规律同中国象棋(走斜”日”)，且假定初始状态马一定在棋盘上。N的范围在[1, 25]，K的范围在[0，100]。">
+<meta property="og:description" content="本文记录关于浮点数的基础知识，重点参考IEEE 754标准对浮点数的规定。">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-07-06T02:48:43.000Z">
-<meta property="article:modified_time" content="2020-07-15T05:05:35.801Z">
+<meta property="article:published_time" content="2020-08-15T03:00:30.000Z">
+<meta property="article:modified_time" content="2020-08-15T04:46:57.171Z">
 <meta property="article:author" content="PDZ">
-<meta property="article:tag" content="leetcode">
-<meta property="article:tag" content="c++">
-<meta property="article:tag" content="动态规划">
-<meta property="article:tag" content="算法">
+<meta property="article:tag" content="常识">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="PDZ" type="application/atom+xml">
@@ -158,20 +155,20 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-1-leetcode-Knight-Probability-in-Chessboard" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-15-floating-point-number-basic" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      leetcode题目：“马”在棋盘上的概率
+      浮点数基础知识
     </h1>
   
 
         
-        <a href="/1-leetcode-Knight-Probability-in-Chessboard/" class="archive-article-date">
-  	<time datetime="2020-07-06T02:48:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-06</time>
+        <a href="/15-floating-point-number-basic/" class="archive-article-date">
+  	<time datetime="2020-08-15T03:00:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-08-15</time>
 </a>
 
         <!-- 开始添加字数统计-->
@@ -181,7 +178,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-keyboard-o"></i>
         <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">2.5k字</span>
+        <span class="post-count">3.1k字</span>
       </span>
     </span>
 
@@ -215,71 +212,114 @@
         
 
 
-        <h2 id="题目大意"><a href="#题目大意" class="headerlink" title="题目大意"></a>题目大意</h2><p>给定一个N×N的棋盘，横纵坐标范围均在[0, N-1]，给定马的起始坐标(r, c)，给定移动次数K。要求返回经过K次移动之后，马仍在在棋盘上的概率。</p>
-<p>马的移动规律同中国象棋(走斜”日”)，且假定初始状态马一定在棋盘上。N的范围在[1, 25]，K的范围在[0，100]。</p>
+        <blockquote>
+<p>本文记录关于浮点数的基础知识，重点参考IEEE 754标准对浮点数的规定。</p>
+</blockquote>
 <a id="more"></a>
 
-<h2 id="思路分析"><a href="#思路分析" class="headerlink" title="思路分析"></a>思路分析</h2><h3 id="转移方式"><a href="#转移方式" class="headerlink" title="转移方式"></a>转移方式</h3><p>对于某一个位置，马儿的走法共有八种，用vector表示分别是：</p>
-<blockquote>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; moves = &#123;&#123;<span class="number">1</span>,<span class="number">2</span>&#125;,&#123;<span class="number">2</span>,<span class="number">1</span>&#125;,&#123;<span class="number">1</span>,<span class="number">-2</span>&#125;,&#123;<span class="number">2</span>,<span class="number">-1</span>&#125;,</span><br><span class="line">                             &#123;<span class="number">-2</span>,<span class="number">-1</span>&#125;,&#123;<span class="number">-1</span>,<span class="number">-2</span>&#125;,&#123;<span class="number">-2</span>,<span class="number">1</span>&#125;,&#123;<span class="number">-1</span>,<span class="number">2</span>&#125;&#125;</span><br></pre></td></tr></table></figure>
-</blockquote>
-<p>马儿在这八个方向上走一步之后，必然导致所剩步数减1。马儿的位置有可能两种情况：</p>
-<ol>
-<li>马儿走出了棋盘。不可再继续走动。</li>
-<li>马儿留在了棋盘。如果K不等于0，则可以继续走下一步。</li>
-</ol>
-<h3 id="目标条件"><a href="#目标条件" class="headerlink" title="目标条件"></a>目标条件</h3><p>如何判断马儿是否走出了棋盘，显然去判断马儿坐标范围即可：</p>
-<blockquote>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (x &gt;= <span class="number">0</span> &amp;&amp; x &lt; N &amp;&amp; y &gt;= <span class="number">0</span> &amp;&amp; y &lt; N) <span class="comment">//仍留在棋盘上</span></span><br></pre></td></tr></table></figure>
-</blockquote>
-<p>另外。如果马儿在棋盘上，且K=0，必然K步之后仍留在棋盘。</p>
-<h3 id="概率计算"><a href="#概率计算" class="headerlink" title="概率计算"></a>概率计算</h3><p>想想很容易明白下面的道理，亦可参考条件概率公式：P(AB) = P(A)P(B|A)。</p>
-<p>现假设K=1，马儿处在棋盘某位置，在8个可能行进的方向中，如果只有3个方向能使的马儿留在棋盘，则所求概率P = 3/8 = 0.375。</p>
-<p>再假设K=2，在一步的8个可能方向中，如果有2个方向能使得马儿留在棋盘；往两个方向行进之后，各有1、2个方向使得马儿能留在棋盘，则所求概率P = 1/8×(1/8)+1/8×(1/8+1/8) = 3/64。</p>
-<p>至此问题已经清晰。</p>
-<h2 id="算法设计"><a href="#算法设计" class="headerlink" title="算法设计"></a>算法设计</h2><h3 id="暴力递归"><a href="#暴力递归" class="headerlink" title="暴力递归"></a>暴力递归</h3><p>我首先想到就是递归，因为每次马儿的移动都是在重复相同的规则，且每次移动后剩下的步数减一。终止条件很简单，只要剩余步数为0，而且马儿在棋盘上，就终止递归调用。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; moves = &#123;&#123;<span class="number">1</span>,<span class="number">2</span>&#125;,&#123;<span class="number">2</span>,<span class="number">1</span>&#125;,&#123;<span class="number">1</span>,<span class="number">-2</span>&#125;,&#123;<span class="number">2</span>,<span class="number">-1</span>&#125;,&#123;<span class="number">-2</span>,<span class="number">-1</span>&#125;,&#123;<span class="number">-1</span>,<span class="number">-2</span>&#125;,&#123;<span class="number">-2</span>,<span class="number">1</span>&#125;,&#123;<span class="number">-1</span>,<span class="number">2</span>&#125;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">double</span> <span class="title">knightProbability</span><span class="params">(<span class="keyword">int</span> N, <span class="keyword">int</span> K, <span class="keyword">int</span> r, <span class="keyword">int</span> c)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!K) <span class="keyword">return</span> <span class="number">1.0</span>;</span><br><span class="line">        <span class="keyword">double</span> ans = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> &amp;mv : moves) &#123;</span><br><span class="line">            <span class="keyword">int</span> xpos = c + mv[<span class="number">0</span>];</span><br><span class="line">            <span class="keyword">int</span> ypos = r + mv[<span class="number">1</span>];</span><br><span class="line">            <span class="keyword">if</span>(xpos&gt;=<span class="number">0</span> &amp;&amp; xpos&lt;N &amp;&amp; ypos&gt;=<span class="number">0</span> &amp;&amp; ypos&lt;N) &#123;</span><br><span class="line">                ans += knightProbability(N, K - <span class="number">1</span>, r, c) / <span class="number">8.0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="原码、补码、移码"><a href="#原码、补码、移码" class="headerlink" title="原码、补码、移码"></a>原码、补码、移码</h2><p>在介绍浮点数之前，不得不提到有符号数的几种表示方法。简而言之，原码就是单纯地由符号位和数值位组成，数值位代表了有符号数绝对值的二进制表示，符号位用来表示该数的符号(0表示正、1表示负)；补码稍微复杂一点，对于有符号数中的正数，其补码和其原码一样，而对于负数，其补码等于<strong>其绝对值的原码取反加一</strong>；移码可以看作补码的映射，常见的移码就是把补码的符号位取反。</p>
+<p>以8位二进制(含一位符号位)表示<code>53</code>和<code>-53</code>为例:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">53</span>:</span><br><span class="line">原码----<span class="number">-0</span> <span class="number">0110101</span>		<span class="comment">// 53 = 32 + 16 + 4 + 1，符号为正</span></span><br><span class="line">补码----<span class="number">-0</span> <span class="number">0110101</span>		<span class="comment">// 正数的补码等于原码</span></span><br><span class="line">移码----<span class="number">-1</span> <span class="number">0110101</span>		<span class="comment">// 把补码的符号位取反即可</span></span><br><span class="line"><span class="comment">/*_________________________________________________________*/</span>    </span><br><span class="line"><span class="number">-53</span>:</span><br><span class="line">原码----<span class="number">-1</span> <span class="number">0110101</span>		<span class="comment">// 符号为负，低7位和+53相同</span></span><br><span class="line">补码----<span class="number">-1</span> <span class="number">1001011</span>		<span class="comment">// 对绝对值的原码53取反加一：00110101-取反-&gt;11001010-加1-&gt;11001011</span></span><br><span class="line">移码----<span class="number">-0</span> <span class="number">1001011</span>		<span class="comment">// 把补码的符号位取反即可</span></span><br></pre></td></tr></table></figure>
 
-<p>一顿操作猛如虎，区区几行就解决了中等难度的力扣题目。就这？就这？</p>
-<p>提交之后傻眼了——竟然运行超时。后来一想，确实是自己太天真。马儿每到一个地方，就往8个方向走，除去一些没有通过if判断的枝节，时间复杂度达到了O(8^K)。随着K的增大，程序根本没法跑。</p>
-<h3 id="哈希辅助递归"><a href="#哈希辅助递归" class="headerlink" title="哈希辅助递归"></a>哈希辅助递归</h3><p>我不愿放弃递归的思路，开始想如何改进。我想，棋盘的格子最多也才25×25个，计算次数不应该那么高。我做了一些思考：</p>
-<p><em>假设某次运行，马儿从A点开始，向右上方走，走了s步到达B点；同时如果马儿从A点开始，向左下方走，也是走了s步到达B点。那么在前一次到达B点后，概率已经算出的情况下，后一次就没必要算了吧。</em></p>
-<p>推广到一般情况，可以总结为<strong>对于确定剩余步数k和横纵坐标y，所求概率P是唯一的，无须多次计算</strong>。</p>
-<p>建立哈希表，根据题目限定的N和K的范围，将剩余步数k和坐标转化为一维值：</p>
-<blockquote>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">unordered_map</span> &lt;<span class="keyword">int</span>, <span class="keyword">double</span>&gt; <span class="built_in">map</span>;</span><br><span class="line"><span class="comment">//map的 first = 700*k + N*x_position + y_position</span></span><br><span class="line"><span class="comment">//确保一组(k,x_position,y_position)的计算结果是唯一的</span></span><br></pre></td></tr></table></figure>
-</blockquote>
-<p>另外，<strong>利用棋盘的对称性</strong>，当得到某个计算结果后，可以最多同时将k下的8个坐标放入哈希表。</p>
-<blockquote>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">recordmap</span><span class="params">(<span class="keyword">int</span> N, <span class="keyword">int</span> k, <span class="keyword">double</span> tmp, <span class="keyword">int</span> xpos, <span class="keyword">int</span> ypos)</span> </span>&#123;</span><br><span class="line">        K = <span class="number">700</span>*k;</span><br><span class="line">        <span class="built_in">map</span>[K + N*xpos + ypos] = tmp;</span><br><span class="line">        <span class="built_in">map</span>[K + N*(N - <span class="number">1</span> - xpos) + ypos] = tmp;</span><br><span class="line">        <span class="built_in">map</span>[K + N*ypos + (N - <span class="number">1</span> - xpos)] = tmp;</span><br><span class="line">        <span class="built_in">map</span>[K + N*ypos + xpos] = tmp;</span><br><span class="line">        <span class="built_in">map</span>[K + N*(N - <span class="number">1</span> - xpos) + (N - <span class="number">1</span> - ypos)] = tmp;</span><br><span class="line">        <span class="built_in">map</span>[K + N*xpos + (N - <span class="number">1</span> - ypos)] = tmp;</span><br><span class="line">        <span class="built_in">map</span>[K + N*(N - <span class="number">1</span> - ypos) + xpos] = tmp;</span><br><span class="line">        <span class="built_in">map</span>[K + N*(N - <span class="number">1</span> - ypos) + (N - <span class="number">1</span> - xpos)] = tmp;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;<span class="comment">//对称性，画图一目了然</span></span><br></pre></td></tr></table></figure>
-</blockquote>
-<p>经过上述两点优化，得到改进后的程序如下。该程序勉强通过了所有测试用例，但是时间空间使用情况都不大好。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; moves = &#123;&#123;<span class="number">1</span>,<span class="number">2</span>&#125;,&#123;<span class="number">2</span>,<span class="number">1</span>&#125;,&#123;<span class="number">1</span>,<span class="number">-2</span>&#125;,&#123;<span class="number">2</span>,<span class="number">-1</span>&#125;,&#123;<span class="number">-2</span>,<span class="number">-1</span>&#125;,&#123;<span class="number">-1</span>,<span class="number">-2</span>&#125;,&#123;<span class="number">-2</span>,<span class="number">1</span>&#125;,&#123;<span class="number">-1</span>,<span class="number">2</span>&#125;&#125;;</span><br><span class="line">    <span class="built_in">unordered_map</span>&lt;<span class="keyword">int</span>, <span class="keyword">double</span>&gt; <span class="built_in">map</span>;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">recordmap</span><span class="params">(<span class="keyword">int</span> N, <span class="keyword">int</span> K, <span class="keyword">double</span> tmp, <span class="keyword">int</span> xpos, <span class="keyword">int</span> ypos)</span> </span>&#123;</span><br><span class="line">        K *= <span class="number">700</span>;</span><br><span class="line">        <span class="built_in">map</span>[K + N*xpos + ypos] = tmp;</span><br><span class="line">        <span class="built_in">map</span>[K + N*(N - <span class="number">1</span> - xpos) + ypos] = tmp;</span><br><span class="line">        <span class="built_in">map</span>[K + N*ypos + (N - <span class="number">1</span> - xpos)] = tmp;</span><br><span class="line">        <span class="built_in">map</span>[K + N*ypos + xpos] = tmp;</span><br><span class="line">        <span class="built_in">map</span>[K + N*(N - <span class="number">1</span> - xpos) + (N - <span class="number">1</span> - ypos)] = tmp;</span><br><span class="line">        <span class="built_in">map</span>[K + N*xpos + (N - <span class="number">1</span> - ypos)] = tmp;</span><br><span class="line">        <span class="built_in">map</span>[K + N*(N - <span class="number">1</span> - ypos) + xpos] = tmp;</span><br><span class="line">        <span class="built_in">map</span>[K + N*(N - <span class="number">1</span> - ypos) + (N - <span class="number">1</span> - xpos)] = tmp;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">double</span> <span class="title">knightProbability</span><span class="params">(<span class="keyword">int</span> N, <span class="keyword">int</span> K, <span class="keyword">int</span> r, <span class="keyword">int</span> c)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!K) <span class="keyword">return</span> <span class="number">1.0</span>;</span><br><span class="line">        <span class="keyword">double</span> ans = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> &amp;mv : moves) &#123;</span><br><span class="line">            <span class="keyword">int</span> xpos = c + mv[<span class="number">0</span>];</span><br><span class="line">            <span class="keyword">int</span> ypos = r + mv[<span class="number">1</span>];</span><br><span class="line">            <span class="keyword">if</span>(xpos&gt;=<span class="number">0</span> &amp;&amp; xpos&lt;N &amp;&amp; ypos&gt;=<span class="number">0</span> &amp;&amp; ypos&lt;N) &#123;</span><br><span class="line">                <span class="keyword">if</span>(<span class="built_in">map</span>.<span class="built_in">find</span>(K*<span class="number">700</span> + N*xpos+ypos)==<span class="built_in">map</span>.<span class="built_in">end</span>())&#123;</span><br><span class="line">                    <span class="keyword">double</span> tmp = knightProbability(N, K - <span class="number">1</span>, xpos, ypos);</span><br><span class="line">                    ans += tmp / <span class="number">8.0</span>;</span><br><span class="line">                    recordmap(N, K, tmp, xpos, ypos);</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span> ans += <span class="built_in">map</span>[K*<span class="number">700</span> + N*xpos + ypos] / <span class="number">8.0</span>;</span><br><span class="line">                &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
-<h3 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h3><p>经常可以看到力扣官方解答用动态规划来解决问题，然而我却常常无法灵活运用。这次当我参考大佬们的代码时，又看到了动态规划的方法。真就万物皆可dp呗？我复制粘贴一运行，好家伙，我服！</p>
-<p>动态规划感觉就是在运行过程中不断记录状态、前后递推吧，拿空间换时间。在这个马儿走棋盘的题目中，它的思路是：</p>
-<ol>
-<li>用一个三维数组dp[x_position][y_position][k]来表示剩余k步时，某个坐标上的所求概率。</li>
-<li>从k=0开始循环，到k=K时结束。k=0时，显然对于所有dp[i][j][0]=1.0。</li>
-<li>在剩余步数为k时，通过k-1状态求得概率P。<strong>每个方向的概率为1/8，如果向某方向行进后落在棋盘内，则dp[i][j][k] = dp[x_position][y_position][k-1]。</strong></li>
-<li>最后返回剩余步数为K时、给定坐标的所求概率dp即可。</li>
-</ol>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">double</span> <span class="title">knightProbability</span><span class="params">(<span class="keyword">int</span> N, <span class="keyword">int</span> K, <span class="keyword">int</span> r, <span class="keyword">int</span> c)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> dir[<span class="number">8</span>][<span class="number">2</span>] = &#123; &#123; <span class="number">1</span>, <span class="number">2</span> &#125;, &#123; <span class="number">1</span>, <span class="number">-2</span> &#125;, &#123; <span class="number">2</span>, <span class="number">1</span> &#125;, &#123; <span class="number">2</span>, <span class="number">-1</span> &#125;, &#123; <span class="number">-1</span>, <span class="number">2</span> &#125;, &#123; <span class="number">-1</span>, <span class="number">-2</span> &#125;, &#123; <span class="number">-2</span>, <span class="number">1</span> &#125;, &#123; <span class="number">-2</span>, <span class="number">-1</span> &#125; &#125;;</span><br><span class="line">        <span class="keyword">double</span> dp[<span class="number">30</span>][<span class="number">30</span>][<span class="number">105</span>] = &#123; <span class="number">0.0</span> &#125;;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> k = <span class="number">0</span>; k &lt;= K; k++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; i++)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; N; j++)</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="keyword">if</span>(k==<span class="number">0</span>)</span><br><span class="line">                    &#123;</span><br><span class="line">                        dp[i][j][k] = <span class="number">1.0</span>;</span><br><span class="line">                        <span class="keyword">continue</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">for</span> (<span class="keyword">auto</span> d : dir)</span><br><span class="line">                    &#123;</span><br><span class="line">                        <span class="keyword">int</span> x = i + d[<span class="number">0</span>];</span><br><span class="line">                        <span class="keyword">int</span> y = j + d[<span class="number">1</span>];</span><br><span class="line">                        <span class="keyword">if</span> (x &gt;= <span class="number">0</span> &amp;&amp; x &lt; N &amp;&amp; y &gt;= <span class="number">0</span> &amp;&amp; y &lt; N)</span><br><span class="line">                        &#123;</span><br><span class="line">                            dp[i][j][k] += dp[x][y][k - <span class="number">1</span>] / <span class="number">8.0</span>;</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dp[r][c][K];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">//引用自官方题解的评论下用户root1203</span></span><br></pre></td></tr></table></figure>
 
-<blockquote>
-<p>暴力递归，不行！</p>
-<p>动态规划，行！</p>
-</blockquote>
-<h3 id="大佬神解答"><a href="#大佬神解答" class="headerlink" title="大佬神解答"></a>大佬神解答</h3><p>看到一个大佬的解答，也挺有意思的。不同于上面用三维数组存储概率P的方法，下面这种解法只用了二维数组来存储。</p>
+<p>由上易知三种表示方法的规则，不难分析它们各自能表示的数值范围。值得注意的是三种表示方法各自的特点：</p>
 <ul>
-<li>二维数组arr[x][y]的含义是<strong>从(r, c)出发，经过K步后，到达(x, y)点的概率。</strong>因此，最终的结果应该是对棋盘上所有位置的arr值求和(因为落在棋盘上的概率等于落在棋盘上各个位置的概率之和)。</li>
-<li>初始化让arr[r][c]=1。第一跳，也就是最外层的第一次循环执行之后，(r, c)周围的8个点(不妨假设都没出界)都会获得1/8的概率。第二跳，每个点又会向四周扩散8个点，我们把这些概率加在arr数组对应位置上…第K跳，arr[x][y]即表示了从(r, c)出发经过K步到达棋盘上(x, y)点的概率。</li>
+<li>原码表示最直观，符合常人的理解习惯。但是运算较为困难，加法和减法需要采取不同的硬件实现方式。</li>
+<li>补码表示能将减法运算转换为加法运算，使得加减法能采用同一套硬件实现。</li>
+<li>移码是补码的一一映射，也能方便地运算。并且移码的整体大小直接反映数值的大小(0000~1111数值大小递增)，便于数的大小比较。</li>
 </ul>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">double</span> <span class="title">knightProbability</span><span class="params">(<span class="keyword">int</span> N, <span class="keyword">int</span> K, <span class="keyword">int</span> r, <span class="keyword">int</span> c)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; dxy&#123;&#123;<span class="number">-1</span>,<span class="number">-2</span>&#125;, &#123;<span class="number">-2</span>,<span class="number">-1</span>&#125;, &#123;<span class="number">1</span>,<span class="number">-2</span>&#125;, &#123;<span class="number">-2</span>,<span class="number">1</span>&#125;, </span><br><span class="line">                                &#123;<span class="number">-1</span>,<span class="number">2</span>&#125;, &#123;<span class="number">2</span>,<span class="number">-1</span>&#125;, &#123;<span class="number">1</span>,<span class="number">2</span>&#125;, &#123;<span class="number">2</span>,<span class="number">1</span>&#125;&#125;;</span><br><span class="line">        <span class="keyword">double</span> arr[N][N], brr[N][N];</span><br><span class="line">        <span class="built_in">memset</span>(arr, <span class="number">0</span>, <span class="keyword">sizeof</span>(arr));</span><br><span class="line">        arr[r][c] = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> k=<span class="number">0</span>; k&lt;K; k++)&#123;</span><br><span class="line">            <span class="built_in">memset</span>(brr, <span class="number">0</span>, <span class="keyword">sizeof</span>(brr));</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;N; i++)</span><br><span class="line">                <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>; j&lt;N; j++)</span><br><span class="line">                    <span class="keyword">for</span>(<span class="keyword">int</span> l=<span class="number">0</span>; l&lt;<span class="number">8</span>; l++)&#123;</span><br><span class="line">                        <span class="keyword">int</span> x = i+dxy[l][<span class="number">0</span>], y = j+dxy[l][<span class="number">1</span>];</span><br><span class="line">                        <span class="keyword">if</span>(x &gt;= <span class="number">0</span> &amp;&amp; y &gt;= <span class="number">0</span> &amp;&amp; x &lt; N &amp;&amp; y &lt; N) </span><br><span class="line">                            brr[i][j] += arr[x][y]/<span class="number">8.0</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">            <span class="built_in">memcpy</span>(arr, brr, <span class="keyword">sizeof</span>(arr));</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">double</span> res = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span>&amp; it:arr)</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">auto</span>&amp; i:it)</span><br><span class="line">                res += i;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">作者：Xdo</span><br><span class="line">链接：https:<span class="comment">//leetcode-cn.com/problems/knight-probability-in-chessboard/solution/c-dong-tai-gui-hua-8-ms-9935-84-mb-9667-by-xdo/</span></span><br><span class="line">来源：力扣（LeetCode）</span><br><span class="line">著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</span><br></pre></td></tr></table></figure>
+<h2 id="科学计数法"><a href="#科学计数法" class="headerlink" title="科学计数法"></a>科学计数法</h2><p>浮点数的思想和科学计数法基本一致。以下面为例：<br>$$<br>123400000=1.234\ast10^8,0.0001234=1.234\ast10^{-4}<br>$$<br>用十进制整型数表示上面的数据，需要存储每一个位上的值，但用科学计数法则可以有效减少存储的量。比如123400000，只需要存储1.234、基数10的阶数8即可，更简化一步，假设规定基数只能是10，规定小数点前的整数部分只能是1-9之间的数，那么只需要存储1234和8，即可表示该数据。</p>
+<p>科学计数法能够很好地抓住重点，表示出绝对值极大或者极小的数值，这是普通表示数值的方法无法做到的。同时也引入了精度的问题，假如上面的例子里要表达的是123456700，而存储位数有限，如只能存储1.234，后面的567就是精度损失。</p>
+<p>科学计数法的优点和缺陷和浮点数也基本一致。</p>
+<h2 id="浮点数"><a href="#浮点数" class="headerlink" title="浮点数"></a>浮点数</h2><h3 id="一般浮点数"><a href="#一般浮点数" class="headerlink" title="一般浮点数"></a>一般浮点数</h3><h4 id="基本组成"><a href="#基本组成" class="headerlink" title="基本组成"></a>基本组成</h4><p>浮点数顾名思义就是小数点位置可以浮动的数，和定点数的固定小数点相对。浮点数大致由两部分组成：一个是尾数，可正可负；一个是阶数，可正可负。</p>
+<p>和科学计数法类比，尾数就是科学计数法的1.234部分，只不过计算机采用二进制，每个位只可能是0和1，所以尾数的表示应该类似于1.0100110或者10.100110或者0.10100110这些形式。实际上计算机中规定浮点数的位数部分采用纯小数形式，所以小数点前面一位作为符号位，小数点以后的位作为尾数的绝对值，因此采用<code>0.10100110</code>，它代表了原码或者补码的<code>+0.6484375</code>。</p>
+<p>和科学计数法类比，阶数就是基数上的指数。计算机一般采用2、4、8、16作为基数，其中最常用的是2为基数，因此本文默认基数为2。那么阶数就代表了2的多少次方。</p>
+<p>综上，一个浮点数可以表示为：<br>$$<br>N=S\times r^j<br>$$<br><code>S</code>代表尾数而<code>j</code>代表阶数，<code>r</code>代表尾数，默认为2。</p>
+<h4 id="表示格式"><a href="#表示格式" class="headerlink" title="表示格式"></a>表示格式</h4><p>浮点数在机器中可以如下表示，前半部分阶数，后半部分是尾数，基数默认为2。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">|&lt;-----j--------&gt;|&lt;--------S--------&gt;|</span><br><span class="line">+----|-----------|----|--------------+</span><br><span class="line">| jf | j1j2...jm | Sf | S1S2...Sn    |</span><br><span class="line">+----|-----------|----|--------------+</span><br><span class="line"> 阶符     阶码     数符|     尾数数值</span><br><span class="line">                      +————&gt; 小数点位置</span><br></pre></td></tr></table></figure>
 
-<p>太妙了。虽然有点暴力的感觉，但是运行结果非常可观。因为只用了2维数组，相对节省年空间。虽然四层循环，但其中操作简单，由于题目数据限制，实际循环次数也是很有限的。</p>
-<p>反观我的暴力递归，实在是不可取，递归保存现场和恢复现场需要花时间，调用函数需要花时间，K层递归的空间、时间开销都是难以接受的。以后除非必要，还是尽可能少用递归吧。</p>
+<p>例如<code>-28.75</code>，用1位阶符、5位阶码、1位数符、8位尾数，阶码和尾数都采用原码表示，则可以表示如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">(<span class="number">-28.75</span>)base10 </span><br><span class="line">= (<span class="number">-110100.11</span>)base2</span><br><span class="line">= <span class="number">-1</span> * (<span class="number">0.11010011</span>)base2 * <span class="number">2</span>^<span class="number">5</span></span><br><span class="line">阶符 jf = <span class="number">0</span>， 阶码 j1j2j3j4j5 = <span class="number">00101</span> = <span class="number">5</span>， 数符 Sf = <span class="number">1</span>， 尾数 S1S2...S8 = <span class="number">11010011</span></span><br><span class="line">结果：</span><br><span class="line">    <span class="number">0</span> <span class="number">00101</span> <span class="number">1</span> <span class="number">11010011</span></span><br></pre></td></tr></table></figure>
 
+<p>注意尾数<code>0.11010011</code>的<code>0.</code>被省略了，因为规定尾数采用纯小数，所以无论如何尾数的绝对值都是以<code>0.</code>开头的，数符1代表该数是负数，阶符0代表基数2的阶数是<code>+5</code>。</p>
+<h4 id="表示范围"><a href="#表示范围" class="headerlink" title="表示范围"></a>表示范围</h4><p>表示范围的具体表达式不作推导，提供思路如下：</p>
+<ul>
+<li>数符要么0要么1，唯一确定了浮点数的正负，因此浮点数的取值范围必然是关于0点对称的，所以先只考虑正情况。</li>
+<li>往大了走，由于规定尾数采用纯小数，尾数最大为<code>(0.111111...)base2</code>，非常接近于1但又不是严格的1，具体有多接近1，显然取决于尾数的位数。</li>
+<li>往大了走，对于阶数，由于底默认为2，阶数越大则整个浮点数越大，所以充满，阶符为0，阶码为<code>(11111...)base2</code>，多大取决于阶码位数。</li>
+<li>往小了走，浮点数能表示的绝对值最小的数，尾数应为<code>(0.000...001)base2</code>，再小就是0了，这里不考虑0。</li>
+<li>往小了走，阶数可以取到负数，即2的<code>-(11111...)base2</code>次方。具体能负多少，取决于阶码的位数和阶数的表示方式，用移码表示阶数和用原码表示阶数，阶数的范围有微小差别。</li>
+</ul>
+<p>所以，从数轴的零往两侧走，一开始的绝对值非常小的数是浮点数无法表示的，然后进入了浮点数能表示或者近似表示的区域，然后超过了最大绝对值范围后，浮点数又无法表示了。在运算时，浮点数结果落入了0附近不能表示的范围，叫做下溢；落入了接近正负无穷大的不能表示的范围，叫做上溢。</p>
+<h4 id="规格化"><a href="#规格化" class="headerlink" title="规格化"></a>规格化</h4><p>规格化的目的是尽可能提高浮点数表示的精度。比如十进制下<code>1234</code>科学计数法记作<code>1.234 * 10^3</code>而不是<code>12.34 * 10^2</code>或者<code>0.1234 * 10^4</code>，二进制浮点数同样规定了尾数应该满足指定的规格。对于本节的一般浮点数，假设尾数(包括数符和尾数数值)整体用补码表示，且基数为2，则规格化只有两种情况：</p>
+<ul>
+<li>情况一：数符=0，尾数数值最高位等于1。它代表小数点左右浮动过程中能够得到的<strong>绝对值</strong>最大的<strong>纯小数</strong>，该数是正数。</li>
+<li>情况二：数符=1，尾数数值最高位等于0。它代表小数点左右浮动过程中能够得到的<strong>绝对值</strong>最大的<strong>纯小数</strong>，该数是负数。</li>
+</ul>
+<p>规格化使得尾数部分小数点放置在第一个有效位左侧，使得向右能涵盖更多的位数，因此能表达更大的精度。</p>
+<h3 id="IEEE-754规范的浮点数"><a href="#IEEE-754规范的浮点数" class="headerlink" title="IEEE-754规范的浮点数"></a>IEEE-754规范的浮点数</h3><h4 id="规范格式"><a href="#规范格式" class="headerlink" title="规范格式"></a>规范格式</h4><p>现代计算机中浮点数一般采用IEEE制定的国际标准，它和前面讲到的一般浮点数略有不同：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">+------|-----------------------|----------------------+</span><br><span class="line">|   S  |     阶码J（含阶符）    |		  尾数M         |</span><br><span class="line">+------|-----------------------|----------------------+</span><br><span class="line">   数符      （采用移码）       |      （采用原码） </span><br><span class="line">   		                      +-------&gt;小数点位置</span><br></pre></td></tr></table></figure>
+
+<p>常用的浮点数有3种，各个部分的长度如下表：</p>
+<table>
+<thead>
+<tr>
+<th align="center"></th>
+<th align="center">符号位S</th>
+<th align="center">阶码</th>
+<th align="center">尾数</th>
+<th align="center">总位数</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">float</td>
+<td align="center">1</td>
+<td align="center">8</td>
+<td align="center">23</td>
+<td align="center">32</td>
+</tr>
+<tr>
+<td align="center">double</td>
+<td align="center">1</td>
+<td align="center">11</td>
+<td align="center">52</td>
+<td align="center">64</td>
+</tr>
+<tr>
+<td align="center">long double</td>
+<td align="center">1</td>
+<td align="center">15</td>
+<td align="center">64</td>
+<td align="center">80</td>
+</tr>
+</tbody></table>
+<p>S占1位，用01表示整个浮点数的正负。</p>
+<p>阶码表示以2为底的阶数，用移码表示，但需要注意的是，这里的移码<strong>不能</strong>采取将补码的最高位取反的方式获得，这是因为把补码的最高位取反，相当于增加了1000…00的偏置量，而IEEE 754标准下的偏置量是0111…11，也就少了一个1。之所以这样设计，是为了保留阶码全0或者全1的情况，以用作特殊用途。</p>
+<p>尾数采用原码表示，采用和一般浮点数略有<strong>不同的规格化</strong>方式——将小数点浮动到第一个有效1的右侧。那么必然尾数是<code>±(1.0101...)base2,±(1.1011...)base2</code>这类的形式，也就是说：当数符用单独的一个位表示后，规格化尾数必然是以1.开头，所以直接砍掉开头，尾数只存放小数点的数据。</p>
+<p>因此，以float型浮点数转化为十进制数的计算公式为：<br>$$<br>N=(-1)^s\times 1.M\times 2^{J-127}<br>$$</p>
+<p>相对地，十进制数转化为float型以下面为例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;示例：-29.375的float表示</span><br><span class="line">1. 正数部分绝对值29转化为二进制是11101，小数部分0.375转化为二进制是0.011。连同符号整体用二进制表示是-11101.011</span><br><span class="line">2. 浮点转换：-11101.011 &#x3D; -1 * 1.1101011 * 2^4</span><br><span class="line">3. 符号S为1，阶码等于阶数4+偏置量127 &#x3D; 131 &#x3D; (10000011)base2，尾数取(110101100...)base2</span><br><span class="line">4. 连起来就是：1 10000011 11010110000000000000000</span><br></pre></td></tr></table></figure>
+
+<p>不难推导IEEE 754标准的浮点数的表示范围，和前面一般浮点数思想完全相同。</p>
+<h2 id="浮点数的加减"><a href="#浮点数的加减" class="headerlink" title="浮点数的加减"></a>浮点数的加减</h2><p>和科学计数法下两个数字的计算类似，浮点数的计算首先要把两个数转化为相同阶数，然后尾数进行加减。加减的结果有可能不再规格化，因此需要进行一次规格化。规格化的结果可能会导致溢出或者尾数精度损失，因此还要进行溢出判断。</p>
+<ul>
+<li>第一步：对阶。为了方便处理，对阶时阶数小的数向阶数大的数看齐。<ul>
+<li>阶数小的浮点数，阶数每加1，尾数就要右移一位，以保持数值不变。</li>
+<li>阶数小的浮点数不断执行阶数加1、尾数右移操作，直到阶数加到和阶数大的浮点数阶数相等。</li>
+</ul>
+</li>
+<li>第二步：尾数运算。对尾数进行加减操作。</li>
+<li>第三步：规格化。第二步的结果可能不是规格化的，因此需要左规或者右规。<ul>
+<li>左规：尾数出现(0.0…)或者(1.1…)则需要左规，即小数点右移直到小数点右边出现第一个有效值，在此过程中，小数点每右移一位，阶数都要减一。</li>
+<li>右规：尾数出现溢出则需要右规，即小数点左移直到小数点右边出现第一个有效值，在此过程中，小数点每左移一位，阶数都要加一。</li>
+</ul>
+</li>
+<li>第四步：舍入。在对阶和右规的过程中，可能引起精度丢失，为此需要舍入。可以采用“0舍1入”或者“恒置1”法。</li>
+<li>第五步：溢出判断。左规右规的过程中可能会导致阶数的增减超出所能表示的范围，因此需要对此做判断，以防使用错误的计算结果。</li>
+</ul>
+<p>以<code>-29.375 + 11.75</code>举例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">-29.375: 1 10000011 11010110000000000000000</span><br><span class="line">11.75:   0 10000010 01111000000000000000000</span><br><span class="line"></span><br><span class="line">1. 对阶：将11.75对阶</span><br><span class="line">阶数+1，变成10000011</span><br><span class="line">尾数写成1.01111，右移一位变成0.101111</span><br><span class="line"></span><br><span class="line">2. 尾数运算：</span><br><span class="line">两者尾数分别是-1.1101011和+0.101111，分别用补码小数表示为：11.00010101 * 2和00.0101111 * 2</span><br><span class="line">上面采用了双符号位补码，以便溢出检查。然后进行运算：</span><br><span class="line">      11.00010101 * 2</span><br><span class="line">	+ 00.01011110 * 2</span><br><span class="line">_____________________________________</span><br><span class="line">      11.01110011 * 2</span><br><span class="line">结果补码转化为原码为-0.10001101 * 2   &#x3D; -1.0001101</span><br><span class="line"></span><br><span class="line">3. 规格化：已经是1.x开头，已是规格化</span><br><span class="line">	原码：-1.0001101</span><br><span class="line">阶数保持对阶后的10000011，表示2的4次方</span><br><span class="line">数符为1，代表符号</span><br><span class="line">尾数写成00011010000000000000000</span><br><span class="line"></span><br><span class="line">4. 舍入：尾数无精度损失，无须处理</span><br><span class="line">5. 溢出：阶数无溢出，无需处理</span><br><span class="line"></span><br><span class="line">结果： 1 10000010 00011010000000000000000</span><br><span class="line">尾数： 1.0001101</span><br><span class="line">十进制： -1 * 2^4 * 1.0001101 &#x3D; -17.625</span><br></pre></td></tr></table></figure>
     
 
 	<!--版权信息-->
@@ -292,7 +332,7 @@
     
     <br>
     <strong>本文链接：</strong>
-    https://piaodazhu.github.io/1-leetcode-Knight-Probability-in-Chessboard/
+    https://piaodazhu.github.io/15-floating-point-number-basic/
     <br>
     <strong>版权声明：</strong>
     本作品采用
@@ -312,19 +352,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">c++</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">动态规划</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">常识</a>
         		</li>
       		
 		</ul>
@@ -380,7 +408,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://piaodazhu.github.io/1-leetcode-Knight-Probability-in-Chessboard/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=https://piaodazhu.github.io/15-floating-point-number-basic/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -394,15 +422,11 @@
   
 <nav id="article-nav">
   
-    <a href="/2-leetcode-Re-Space-LCCI/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          leetcode题目：恢复空格
-        
-      </div>
-    </a>
   
+    <a href="/14-leetcode-Random-Pick-with-Blacklist/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">leetcode题目：黑名单中的随机数</div>
+      <i class="icon-circle-right"></i>
+    </a>
   
 </nav>
 
@@ -427,7 +451,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#题目大意"><span class="toc-number">1.</span> <span class="toc-text">题目大意</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#思路分析"><span class="toc-number">2.</span> <span class="toc-text">思路分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#转移方式"><span class="toc-number">2.1.</span> <span class="toc-text">转移方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#目标条件"><span class="toc-number">2.2.</span> <span class="toc-text">目标条件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#概率计算"><span class="toc-number">2.3.</span> <span class="toc-text">概率计算</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#算法设计"><span class="toc-number">3.</span> <span class="toc-text">算法设计</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#暴力递归"><span class="toc-number">3.1.</span> <span class="toc-text">暴力递归</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#哈希辅助递归"><span class="toc-number">3.2.</span> <span class="toc-text">哈希辅助递归</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#动态规划"><span class="toc-number">3.3.</span> <span class="toc-text">动态规划</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#大佬神解答"><span class="toc-number">3.4.</span> <span class="toc-text">大佬神解答</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#原码、补码、移码"><span class="toc-number">1.</span> <span class="toc-text">原码、补码、移码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#科学计数法"><span class="toc-number">2.</span> <span class="toc-text">科学计数法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#浮点数"><span class="toc-number">3.</span> <span class="toc-text">浮点数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#一般浮点数"><span class="toc-number">3.1.</span> <span class="toc-text">一般浮点数</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#基本组成"><span class="toc-number">3.1.1.</span> <span class="toc-text">基本组成</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#表示格式"><span class="toc-number">3.1.2.</span> <span class="toc-text">表示格式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#表示范围"><span class="toc-number">3.1.3.</span> <span class="toc-text">表示范围</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#规格化"><span class="toc-number">3.1.4.</span> <span class="toc-text">规格化</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#IEEE-754规范的浮点数"><span class="toc-number">3.2.</span> <span class="toc-text">IEEE-754规范的浮点数</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#规范格式"><span class="toc-number">3.2.1.</span> <span class="toc-text">规范格式</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#浮点数的加减"><span class="toc-number">4.</span> <span class="toc-text">浮点数的加减</span></a></li></ol>
                     </div>
                 </span>
             </div>

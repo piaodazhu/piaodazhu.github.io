@@ -2,6 +2,27 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://piaodazhu.github.io/15-floating-point-number-basic/</loc>
+    
+    <lastmod>2020-08-15T04:46:57.171Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://piaodazhu.github.io/mypages/mail.html</loc>
+    
+    <lastmod>2020-08-14T09:57:28.279Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://piaodazhu.github.io/12-multi-thread-c-programing/</loc>
+    
+    <lastmod>2020-08-14T09:18:19.673Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://piaodazhu.github.io/14-leetcode-Random-Pick-with-Blacklist/</loc>
     
     <lastmod>2020-08-08T04:52:14.812Z</lastmod>
@@ -30,13 +51,6 @@
   </url>
   
   <url>
-    <loc>https://piaodazhu.github.io/12-multi-thread-c-programing/</loc>
-    
-    <lastmod>2020-07-31T15:53:35.742Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://piaodazhu.github.io/11-tmux-Terminal-Multiplexer/</loc>
     
     <lastmod>2020-07-28T11:47:23.377Z</lastmod>
@@ -54,13 +68,6 @@
     <loc>https://piaodazhu.github.io/9-Learning-regex/</loc>
     
     <lastmod>2020-07-22T16:47:59.124Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://piaodazhu.github.io/mypages/mail.html</loc>
-    
-    <lastmod>2020-07-21T12:17:51.788Z</lastmod>
     
   </url>
   
