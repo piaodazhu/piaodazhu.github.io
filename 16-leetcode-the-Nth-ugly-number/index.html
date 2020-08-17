@@ -6,16 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://piaodazhu.github.io">
-  <title>Tag: shell | PDZ</title>
+  <title>leetcode题目：丑数 | PDZ</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="never stop learning">
-<meta property="og:type" content="website">
-<meta property="og:title" content="PDZ">
-<meta property="og:url" content="https://piaodazhu.github.io/tags/shell/index.html">
+  <meta name="description" content="此题有多种可供选择的算法，但采用不同算法的运行效率有很大差别。由于运行时间限制，巧妙地利用动态规划成为为数不多的快速解决方案之一。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="leetcode题目：丑数">
+<meta property="og:url" content="https://piaodazhu.github.io/16-leetcode-the-Nth-ugly-number/index.html">
 <meta property="og:site_name" content="PDZ">
-<meta property="og:description" content="never stop learning">
+<meta property="og:description" content="此题有多种可供选择的算法，但采用不同算法的运行效率有很大差别。由于运行时间限制，巧妙地利用动态规划成为为数不多的快速解决方案之一。">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-08-17T12:00:00.000Z">
+<meta property="article:modified_time" content="2020-08-17T13:00:51.929Z">
 <meta property="article:author" content="PDZ">
+<meta property="article:tag" content="leetcode">
+<meta property="article:tag" content="c++">
+<meta property="article:tag" content="动态规划">
+<meta property="article:tag" content="算法">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="PDZ" type="application/atom+xml">
@@ -152,77 +158,325 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-16-leetcode-the-Nth-ugly-number" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/5-Ubuntu-fast-cross-GFW/" class="archive-article-date">
-  	<time datetime="2020-07-14T02:48:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-14</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/5-Ubuntu-fast-cross-GFW/">科学上网小技巧：利用shell脚本光速启动或停止clash</a>
+    <h1 class="article-title" itemprop="name">
+      leetcode题目：丑数
     </h1>
   
 
-        <div class="article-info info-on-right">
+        
+        <a href="/16-leetcode-the-Nth-ugly-number/" class="archive-article-date">
+  	<time datetime="2020-08-17T12:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-08-17</time>
+</a>
+
+        <!-- 开始添加字数统计-->
+        
+          <div style="margin-top:10px;">
+    <span class="post-time">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-keyboard-o"></i>
+        <span class="post-meta-item-text">  字数统计: </span>
+        <span class="post-count">1.6k字</span>
+      </span>
+    </span>
+
+    <span class="post-time">
+      &nbsp; | &nbsp;
+      <span class="post-meta-item-icon">
+        <i class="fa fa-hourglass-half"></i>
+        <span class="post-meta-item-text">  阅读时长: </span>
+        <span class="post-count">6分</span>
+      </span>
+    </span>
+</div>
+
+
           
+        <!-- 添加完成 -->
+
+        
+
+	
+          <span class="archive-article-date">
+              阅读量 <span id="busuanzi_value_page_pv"></span>
+          </span>
+        
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+
+    
+        
+
+
+        <blockquote>
+<p>此题有多种可供选择的算法，但采用不同算法的运行效率有很大差别。由于运行时间限制，巧妙地利用动态规划成为为数不多的快速解决方案之一。</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>定义：<strong>丑数</strong>是因子只包含2，3，5的正整数。特别的，1也是丑数。</p>
+<p>目标：输入正整数n，找出从大到小第n个丑数作为输出。</p>
+<p>限定：n不超过1690.</p>
+<p>示例：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入: n = <span class="number">10</span></span><br><span class="line">输出: <span class="number">12</span></span><br><span class="line">解释: <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>, <span class="number">12</span> 是前 <span class="number">10</span> 个丑数。</span><br></pre></td></tr></table></figure>
+
+<h2 id="思路分析"><a href="#思路分析" class="headerlink" title="思路分析"></a>思路分析</h2><h3 id="暴力检查"><a href="#暴力检查" class="headerlink" title="暴力检查"></a>暴力检查</h3><p>从1开始，对于每一个数检查它是否是“丑数”，如果是则让n减一。直到n减为0，此时说明当前数已经是第n个“丑数”，输出答案即可。</p>
+<p>对于每次丑数检查，采用因子分解，分解出所有的2、3、5因子，最终如果剩下的不是1，则说明有2、3、5以外的因子，说明不是丑数。</p>
+<p>这种方法时间复杂度为<code>O(m^2)</code>，其中m等于第n个“丑数”的值，一般会远大于n。暴力方法复杂度显然是不符合要求的：一方面要对1~m逐一检查，工作量巨大，另一方面因子分解有大量的重复计算。</p>
+<h3 id="记忆数组-逆向推断"><a href="#记忆数组-逆向推断" class="headerlink" title="记忆数组+逆向推断"></a>记忆数组+逆向推断</h3><p>为了解决重复计算的问题，可以采用一个数组来进行记忆。依据如下：</p>
+<ul>
+<li>假设当前的<code>i</code>是“丑数”，说明<code>i</code>中不含有非2、3、5的因子，那么<code>i</code>如果能被2、3、5中的任意一个整除，则整除的结果必然也是“丑数”。</li>
+<li>假设当前的<code>i</code>不是“丑数”，说明<code>i</code>中含有非2、3、5的因子，那么<code>i</code>如果能被2、3、5中的任意一个整除，则整除的结果必然也不是“丑数”。</li>
+<li>如果当前的<code>i</code>不能被2、3、5中任意一个数整除，除非<code>i=1</code>，否则<code>i</code>一定不是丑数。</li>
+</ul>
+<p>因此利用一个<code>vector&lt;bool&gt;isugly</code>作为记忆数组，利用逆向推断结合记忆数组来避免重复计算。首先定义<code>isugly[1]=true</code>代表1是“丑数”，然后从2开始，对于每一个数都进行逆向推断，直到找到第n个丑数。逆向推断可以根据上述的依据进行。</p>
+<p>这种方法仍然无法避免从1~m的逐一检查，但是在检查的过程中避免了大量的重复计算，只需要往前推一步即可判断是否是“丑数”，因此算法时间复杂度减小到了<code>O(m)</code>。</p>
+<p>实际判断的过程涉及的逻辑不是很简单，还要做除法运算，所以仍然无法在时间限制内完成运行。更糟糕的是，记忆数组的维度必须大于m，空间开销是巨大的<code>O(m)</code>，记忆数组绝大多数都存放的<code>false</code>，对于寻找丑数来说这些<code>false</code>是没有必要的。</p>
+<h3 id="哈希表-逆向推断"><a href="#哈希表-逆向推断" class="headerlink" title="哈希表+逆向推断"></a>哈希表+逆向推断</h3><p>这种方法是上一种方法的改进，降低了空间复杂度。</p>
+<p>利用一个<code>unordered_map&lt;int,bool&gt;isugly</code>作为记忆哈希表，逆向推断的时候只需要参考整除结果对应的哈希值。和记忆数组的不同的是利用哈希表进行记忆只需要记下“丑数”的位置，其他思路相同。</p>
+<p>时间复杂度<code>O(m)</code>，空间复杂度<code>O(n)</code>，仍然无法在时间限制能完成运行。</p>
+<h3 id="三指针动态规划"><a href="#三指针动态规划" class="headerlink" title="三指针动态规划"></a>三指针动态规划</h3><p>这种思路非常巧妙，和上面三种思路截然不同。简单地说，其思想是：</p>
+<ul>
+<li>如果一个数是“丑数”，则它乘以2、3、5中的任意数都是”丑数”。换句话说，“丑数”从小到大来看，较大的“丑数”来自于较小的“丑数”乘以2、3、5。</li>
+<li>把乘以2、乘以3、乘以5看作三种转移方式，则从1开始，“丑数”能够向后转移。</li>
+<li>假如某一个“丑数”是前面的某个“丑数”<code>dp[p2]</code>通过乘以2的转移方式获得(如<code>12=6*2</code>)，那么下一个<strong>通过乘以2的转移方式</strong>获得的“丑数”，必然是<code>p2</code>往后的数转移来的(如<code>14=7*2，因为14&gt;12，因此7&gt;6</code>)。</li>
+</ul>
+<p>上面第一点说明这种算法属于正向推断，从“丑数”往下推下一个“丑数”，这和给定一个数，然后推断它是不是“丑数”的逆向推断不同。第二点是实现的关键，也是三指针的由来，三个指针分别代表了指向某个已知“丑数”的三种转移方式。第三点是理解的难点，下面表格更清楚地说明。</p>
+<table>
+<thead>
+<tr>
+<th>index\丑数\转移方式</th>
+<th>×2</th>
+<th>×3</th>
+<th>×5</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0</td>
+<td>1（choose，dp2++）</td>
+<td>1（choose，dp3++）</td>
+<td>1（choose，dp5++）</td>
+</tr>
+<tr>
+<td>1</td>
+<td>2（choose，dp2++）</td>
+<td>3</td>
+<td>5</td>
+</tr>
+<tr>
+<td>2</td>
+<td>4</td>
+<td>3（choose，dp3++）</td>
+<td>5</td>
+</tr>
+<tr>
+<td>3</td>
+<td>4（choose，dp2++）</td>
+<td>6</td>
+<td>5</td>
+</tr>
+<tr>
+<td>4</td>
+<td>6</td>
+<td>6</td>
+<td>5（choose，dp5++）</td>
+</tr>
+<tr>
+<td>5</td>
+<td>6（choose，dp2++）</td>
+<td>6</td>
+<td>10</td>
+</tr>
+<tr>
+<td>6</td>
+<td>8（choose，dp2++）</td>
+<td>9</td>
+<td>10</td>
+</tr>
+<tr>
+<td>7</td>
+<td>10</td>
+<td>9（choose，dp3++）</td>
+<td>10</td>
+</tr>
+<tr>
+<td>8</td>
+<td>10（choose，dp2++）</td>
+<td>12</td>
+<td>10（choose，dp5++）</td>
+</tr>
+</tbody></table>
+<p>上表第一列表示“丑数”的顺序索引，第2/3/4列分别代表三个指针的移动和转移结果。对于每一行，三种转移结果比较大小，最小的结果作为该index下的“丑数”。一旦某个指针的转移结果被选中，该指针就要后移一位；最小的结果可能有多个，所有转移结果最小的指针都应该向后移一位——这就是前面所述的第三点。唯有如此，才能保证下一个“丑数”既没有跳跃，又没有重复。</p>
+<h2 id="实现代码"><a href="#实现代码" class="headerlink" title="实现代码"></a>实现代码</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="keyword">int</span> <span class="title">nthUglyNumber</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">		<span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">dp</span><span class="params">(n, <span class="number">0</span>)</span></span>;</span><br><span class="line">		dp[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">int</span> p2 = <span class="number">0</span>, p3 = <span class="number">0</span>, p5 = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n; i++) &#123;</span><br><span class="line">			dp[i] = min(min(dp[p2] * <span class="number">2</span>, dp[p3] * <span class="number">3</span>), dp[p5] * <span class="number">5</span>);</span><br><span class="line">			<span class="keyword">if</span> (dp[i] == dp[p2] * <span class="number">2</span>)</span><br><span class="line">				p2++;</span><br><span class="line">			<span class="keyword">if</span> (dp[i] == dp[p3] * <span class="number">3</span>)</span><br><span class="line">				p3++;</span><br><span class="line">			<span class="keyword">if</span> (dp[i] == dp[p5] * <span class="number">5</span>)</span><br><span class="line">				p5++;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> dp[n - <span class="number">1</span>];</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">作者：mrsate</span><br><span class="line">链接：https:<span class="comment">//leetcode-cn.com/problems/chou-shu-lcof/solution/chou-shu-ii-qing-xi-de-tui-dao-si-lu-by-mrsate/</span></span><br><span class="line">来源：力扣（LeetCode）</span><br><span class="line">著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</span><br></pre></td></tr></table></figure>
+    
+
+	<!--版权信息-->
+
+
+  <div class="declare">
+    <strong>本文作者：</strong>
+    
+      PDZ
+    
+    <br>
+    <strong>本文链接：</strong>
+    https://piaodazhu.github.io/16-leetcode-the-Nth-ugly-number/
+    <br>
+    <strong>版权声明：</strong>
+    本作品采用
+    <a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a>
+    进行许可。转载请注明出处！
+    
+  </div>
+
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">linux</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">ubuntu</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">c++</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">shell</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">动态规划</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">clash</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">科学上网</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=https://piaodazhu.github.io/16-leetcode-the-Nth-ugly-number/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/15-floating-point-number-basic/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">浮点数基础知识</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#题目描述"><span class="toc-number">1.</span> <span class="toc-text">题目描述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#思路分析"><span class="toc-number">2.</span> <span class="toc-text">思路分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#暴力检查"><span class="toc-number">2.1.</span> <span class="toc-text">暴力检查</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#记忆数组-逆向推断"><span class="toc-number">2.2.</span> <span class="toc-text">记忆数组+逆向推断</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#哈希表-逆向推断"><span class="toc-number">2.3.</span> <span class="toc-text">哈希表+逆向推断</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三指针动态规划"><span class="toc-number">2.4.</span> <span class="toc-text">三指针动态规划</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实现代码"><span class="toc-number">3.</span> <span class="toc-text">实现代码</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
+        </div>
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
 
+  
+
+  
 
 
           </div>
@@ -282,9 +536,9 @@
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: true,
 		toc_hide_index: false,
