@@ -16,7 +16,7 @@
 <meta property="og:description" content="本文记录关于浮点数的基础知识，重点参考IEEE 754标准对浮点数的规定。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-08-15T03:00:30.000Z">
-<meta property="article:modified_time" content="2020-08-15T08:06:05.310Z">
+<meta property="article:modified_time" content="2020-08-21T09:10:44.629Z">
 <meta property="article:author" content="PDZ">
 <meta property="article:tag" content="常识">
 <meta name="twitter:card" content="summary">
@@ -237,7 +237,7 @@
 <p>和科学计数法类比，阶数就是基数上的指数。计算机一般采用2、4、8、16作为基数，其中最常用的是2为基数，因此本文默认基数为2。那么阶数就代表了2的多少次方。</p>
 <p>综上，一个浮点数可以表示为：<br>$$<br>N=S\times r^j<br>$$<br><code>S</code>代表尾数而<code>j</code>代表阶数，<code>r</code>代表尾数，默认为2。</p>
 <h4 id="表示格式"><a href="#表示格式" class="headerlink" title="表示格式"></a>表示格式</h4><p>浮点数在机器中可以如下表示，前半部分阶数，后半部分是尾数，基数默认为2。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">|&lt;-----j--------&gt;|&lt;--------S--------&gt;|</span><br><span class="line">+----|-----------|----|--------------+</span><br><span class="line">| jf | j1j2...jm | Sf | S1S2...Sn    |</span><br><span class="line">+----|-----------|----|--------------+</span><br><span class="line"> 阶符     阶码     数符|     尾数数值</span><br><span class="line">                      +————&gt; 小数点位置</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">|&lt;-----j--------&gt;|&lt;--------S--------&gt;|</span><br><span class="line">+----|-----------|----|--------------+</span><br><span class="line">| jf | j1j2...jm | Sf | S1S2...Sn    |</span><br><span class="line">+----|-----------|----|--------------+</span><br><span class="line"> 阶符     阶码     数符 |    尾数数值</span><br><span class="line">                      +————&gt; 小数点位置</span><br></pre></td></tr></table></figure>
 
 <p>例如<code>-28.75</code>，用1位阶符、5位阶码、1位数符、8位尾数，阶码和尾数都采用原码表示，则可以表示如下：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">(<span class="number">-28.75</span>)base10 </span><br><span class="line">= (<span class="number">-110100.11</span>)base2</span><br><span class="line">= <span class="number">-1</span> * (<span class="number">0.11010011</span>)base2 * <span class="number">2</span>^<span class="number">5</span></span><br><span class="line">阶符 jf = <span class="number">0</span>， 阶码 j1j2j3j4j5 = <span class="number">00101</span> = <span class="number">5</span>， 数符 Sf = <span class="number">1</span>， 尾数 S1S2...S8 = <span class="number">11010011</span></span><br><span class="line">结果：</span><br><span class="line">    <span class="number">0</span> <span class="number">00101</span> <span class="number">1</span> <span class="number">11010011</span></span><br></pre></td></tr></table></figure>
@@ -259,7 +259,7 @@
 </ul>
 <p>规格化使得尾数部分小数点放置在第一个有效位左侧，使得向右能涵盖更多的位数，因此能表达更大的精度。</p>
 <h3 id="IEEE-754规范的浮点数"><a href="#IEEE-754规范的浮点数" class="headerlink" title="IEEE-754规范的浮点数"></a>IEEE-754规范的浮点数</h3><h4 id="规范格式"><a href="#规范格式" class="headerlink" title="规范格式"></a>规范格式</h4><p>现代计算机中浮点数一般采用IEEE制定的国际标准，它和前面讲到的一般浮点数略有不同：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">+------|-----------------------|----------------------+</span><br><span class="line">|   S  |     阶码J（含阶符）     |		  尾数M           |</span><br><span class="line">+------|-----------------------|----------------------+</span><br><span class="line">   数符      （采用移码）         |      （采用原码） </span><br><span class="line">   		                        +-------&gt;小数点位置</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">+------|-----------------------|----------------------+</span><br><span class="line">|   S  |     阶码J（含阶符）     |       尾数M          |</span><br><span class="line">+------|-----------------------|----------------------+</span><br><span class="line">  数符       （采用移码）        |     （采用原码） </span><br><span class="line">                               +-------&gt;小数点位置</span><br></pre></td></tr></table></figure>
 
 <p>常用的浮点数有3种，各个部分的长度如下表：</p>
 <table>
@@ -320,6 +320,7 @@
 </ul>
 <p>以<code>-29.375 + 11.75</code>举例：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">-29.375: 1 10000011 11010110000000000000000</span><br><span class="line">11.75:   0 10000010 01111000000000000000000</span><br><span class="line"></span><br><span class="line">1. 对阶：将11.75对阶</span><br><span class="line">阶数+1，变成10000011</span><br><span class="line">尾数写成1.01111，右移一位变成0.101111</span><br><span class="line"></span><br><span class="line">2. 尾数运算：</span><br><span class="line">两者尾数分别是-1.1101011和+0.101111，分别用补码小数表示为：11.00010101 * 2和00.0101111 * 2</span><br><span class="line">上面采用了双符号位补码，以便溢出检查。然后进行运算：</span><br><span class="line">      11.00010101 * 2</span><br><span class="line">    + 00.01011110 * 2</span><br><span class="line">_____________________________________</span><br><span class="line">      11.01110011 * 2</span><br><span class="line">结果补码转化为原码为-0.10001101 * 2   &#x3D; -1.0001101</span><br><span class="line"></span><br><span class="line">3. 规格化：已经是1.x开头，已是规格化</span><br><span class="line">	原码：-1.0001101</span><br><span class="line">阶数保持对阶后的10000011，表示2的4次方</span><br><span class="line">数符为1，代表符号</span><br><span class="line">尾数写成00011010000000000000000</span><br><span class="line"></span><br><span class="line">4. 舍入：尾数无精度损失，无须处理</span><br><span class="line">5. 溢出：阶数无溢出，无需处理</span><br><span class="line"></span><br><span class="line">结果： 1 10000010 00011010000000000000000</span><br><span class="line">尾数： 1.0001101</span><br><span class="line">十进制： -1 * 2^4 * 1.0001101 &#x3D; -17.625</span><br></pre></td></tr></table></figure>
+
     
 
 	<!--版权信息-->
@@ -658,6 +659,10 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">算法</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
               </li>
              
@@ -675,10 +680,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">gdb</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">算法</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -706,15 +707,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">常识</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">字符串</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">排序</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">索引数组</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">常识</a>
               </li>
              
               <li class="article-tag-list-item">

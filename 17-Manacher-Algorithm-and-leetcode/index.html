@@ -6,17 +6,28 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://piaodazhu.github.io">
-  <title>Tag: code | PDZ</title>
+  <title>详解马拉车算法——原理、实现与练习 | PDZ</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="never stop learning">
-<meta property="og:type" content="website">
-<meta property="og:title" content="PDZ">
-<meta property="og:url" content="https://piaodazhu.github.io/tags/code/index.html">
+  <meta name="description" content="马拉车算法(Manacher’s Algorithm)能以O(n)的时间复杂度完成对字符串中最长回文子串的搜索。相比时间复杂度为O(n2)的暴力方法，马拉车算法巧妙地利用回文串的性质减少了重复计算，带来了更高的运行效率。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="详解马拉车算法——原理、实现与练习">
+<meta property="og:url" content="https://piaodazhu.github.io/17-Manacher-Algorithm-and-leetcode/index.html">
 <meta property="og:site_name" content="PDZ">
-<meta property="og:description" content="never stop learning">
+<meta property="og:description" content="马拉车算法(Manacher’s Algorithm)能以O(n)的时间复杂度完成对字符串中最长回文子串的搜索。相比时间复杂度为O(n2)的暴力方法，马拉车算法巧妙地利用回文串的性质减少了重复计算，带来了更高的运行效率。">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://piaodazhu.github.io/17-Manacher-Algorithm-and-leetcode/model.png">
+<meta property="og:image" content="https://piaodazhu.github.io/17-Manacher-Algorithm-and-leetcode/situation1.png">
+<meta property="og:image" content="https://piaodazhu.github.io/17-Manacher-Algorithm-and-leetcode/situation2.png">
+<meta property="og:image" content="https://piaodazhu.github.io/17-Manacher-Algorithm-and-leetcode/situation3.png">
+<meta property="article:published_time" content="2020-08-21T10:00:00.000Z">
+<meta property="article:modified_time" content="2020-08-21T09:11:19.837Z">
 <meta property="article:author" content="PDZ">
+<meta property="article:tag" content="leetcode">
+<meta property="article:tag" content="c++">
+<meta property="article:tag" content="算法">
+<meta property="article:tag" content="字符串">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://piaodazhu.github.io/17-Manacher-Algorithm-and-leetcode/model.png">
   
     <link rel="alternative" href="/atom.xml" title="PDZ" type="application/atom+xml">
   
@@ -152,77 +163,310 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-17-Manacher-Algorithm-and-leetcode" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/8-the-tree-processor-code/" class="archive-article-date">
-  	<time datetime="2020-07-21T11:17:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-21</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/8-the-tree-processor-code/">绝版程序源码：the tree processor</a>
+    <h1 class="article-title" itemprop="name">
+      详解马拉车算法——原理、实现与练习
     </h1>
   
 
-        <div class="article-info info-on-right">
+        
+        <a href="/17-Manacher-Algorithm-and-leetcode/" class="archive-article-date">
+  	<time datetime="2020-08-21T10:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-08-21</time>
+</a>
+
+        <!-- 开始添加字数统计-->
+        
+          <div style="margin-top:10px;">
+    <span class="post-time">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-keyboard-o"></i>
+        <span class="post-meta-item-text">  字数统计: </span>
+        <span class="post-count">3.3k字</span>
+      </span>
+    </span>
+
+    <span class="post-time">
+      &nbsp; | &nbsp;
+      <span class="post-meta-item-icon">
+        <i class="fa fa-hourglass-half"></i>
+        <span class="post-meta-item-text">  阅读时长: </span>
+        <span class="post-count">13分</span>
+      </span>
+    </span>
+</div>
+
+
           
+        <!-- 添加完成 -->
+
+        
+
+	
+          <span class="archive-article-date">
+              阅读量 <span id="busuanzi_value_page_pv"></span>
+          </span>
+        
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+
+    
+        
+
+
+        <blockquote>
+<p>马拉车算法(Manacher’s Algorithm)能以O(n)的时间复杂度完成对字符串中<strong>最长回文子串</strong>的搜索。相比时间复杂度为O(n2)的暴力方法，马拉车算法巧妙地利用回文串的性质减少了重复计算，带来了更高的运行效率。</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>若一个字符串等于其自身的倒序放置，则称该字符串为回文字符串。比如<code>a</code>，<code>aa</code>，<code>aba</code>，<code>abba</code>是回文字符串。现给定一个字符串<code>str</code>，要求找出<code>str</code>的所有回文字符<strong>子串</strong>中长度的最大值。</p>
+<p>以上就是最长回文子串的问题。要解决这个问题，比较直观的思路就是对<code>str</code>中每个位置都采用中心扩展方法，维护目前为止的最大回文串长度。主要的难点在于，回文串可能有两种形式：一种是奇数串长形式，一种是偶数串长形式。前者字符串中心是一个任意字符，要求往左右两边走各个对应位置都是相同的字符；后者字符串的中心没有字符，同样需要左右两边对应位置都是相同的字符。</p>
+<p>上述暴力方法需要针对<code>str</code>每个位置，都往两边进行扩散检查，直到两边对应位置字符不同，则可以确定以当前位置为中心的回文字符串的长度；针对回文字符串的两种形式，扩散同样要分两种不同的方式。显然时间复杂度为O(n2)，空间复杂度O(1)。对于<code>str</code>长度较大的情境，需要大量的执行时间。</p>
+<p>马拉车算法巧妙地解决了这个问题。</p>
+<h2 id="核心原理"><a href="#核心原理" class="headerlink" title="核心原理"></a>核心原理</h2><p>马拉车算法的思想是利用回文串的对称性减少重复计算。即算法运行的方向是从左往右的，在往右逐一计算当前位置往两边扩展的最大长度之前，假如该位置恰好处在以左边某位置为中心的一个回文长字符串中，那么本次计算可以利用以回文长字符串中心为轴的镜像位置上的扩展结果。由于镜像位置处于当前位置左边，因此其扩展长度已经被计算过。</p>
+<p>当然上述只是简要描述，实际情况稍微复杂一点，首先简单地建模以便描述。</p>
+<h3 id="简单建模"><a href="#简单建模" class="headerlink" title="简单建模"></a>简单建模</h3><p>下图建模，均不考虑回文字符串的偶数串长形式(后面将会知道原因)。</p>
+<p><img src="/17-Manacher-Algorithm-and-leetcode/model.png" alt="model"></p>
+<p>对于每一个位置，定义这几个关系密切的量：</p>
+<ul>
+<li>最大中心扩展长度L。即以该位置为中心，向两边扩展出的最大长度。它等于左扩展+右扩展+中心字符长度1。</li>
+<li>以该位置为中心的最长回文字串长度Ls。它和最大中心扩展长度等价。</li>
+<li>单向臂长arm。等于右扩展+中心字符长度1。</li>
+<li>单向扩展长度span。等价于arm。</li>
+</ul>
+<p>显然上述四个量满足简单的线性关系，求其中一个即可。后面主要用到arm和span两个量。</p>
+<p>算法从左往右运行，需要计算每个位置的span，存入数组。如上图，当前遍历到的位置是<code>i</code>，需要计算<code>span[i]</code>。于此同时，算法运行过程中维护一对变量<code>center</code>和<code>arm</code>，满足<code>arm=span[center]</code>，且<code>reach=center+arm-1</code>能延伸得最远。以<code>center</code>为中心，当前位置的镜像位置的对应的span为<code>mirror</code>。</p>
+<blockquote>
+<p> 既然已经遍历到了<code>i</code>位置，说明<code>i</code>位置以前的span都已经计算完成。</p>
+</blockquote>
+<h3 id="情况一"><a href="#情况一" class="headerlink" title="情况一"></a>情况一</h3><p>讨论一种最爽的情况：<code>mirror + i - 1 &lt; reach</code>.</p>
+<p><img src="/17-Manacher-Algorithm-and-leetcode/situation1.png" alt="situation1"></p>
+<p>当前需要求得<code>span[8]</code>，此时的<code>center=6, arm=5, reach=10. mirror=span[4]=2. mirror+i-1=9 &lt; reach</code>.</p>
+<p>这种情况下，不用算啦，直接就有<code>span[8]=mirror</code>。</p>
+<p>证明：因为<code>span[4]=2</code>，说明图中<code>str[2]!=str[6]</code>，又因为以<code>center</code>为中心的长回文子串包含了从<code>str[2]</code>到<code>str[10]</code>，所以必然<code>str[6]!=str[10]</code>，即以当前位置<code>i</code>为中心，扩展情况和镜像位置的情况相同。</p>
+<h3 id="情况二"><a href="#情况二" class="headerlink" title="情况二"></a>情况二</h3><p>第二种情况是：<code>mirror + i - 1 &gt; reach</code>.</p>
+<p><img src="/17-Manacher-Algorithm-and-leetcode/situation2.png" alt="situation2"></p>
+<p>当前需要求得<code>span[8]</code>，此时的<code>center=6, arm=5, reach=10. mirror=span[4]=4. mirror+i-1=11 &gt; reach</code>.</p>
+<p>这种情况下也不用算啦，直接有<code>span[8]=3=reach-i+1</code>。</p>
+<p>证明：上图中红框和绿框分别代表以镜像位置和<code>center</code>为中心的最长回文子串。红框中，由于对称性，必然有最左边的y字符等于最右边的y字符。再看绿框，由于最长只扩展到了左右的a字符处，说明必然有更左边的y字符<strong>不等于</strong>更右边的v字符:</p>
+<p><code>str1]=str[7]=str[5], but str[1]!=str[11], so str[5]!=str[11]</code>，此时<code>span[8]</code>只能是<code>reach-i+1</code>了。</p>
+<h3 id="情况三"><a href="#情况三" class="headerlink" title="情况三"></a>情况三</h3><p>第二种情况是：<code>mirror + i - 1 = reach</code>.</p>
+<p><img src="/17-Manacher-Algorithm-and-leetcode/situation3.png" alt="situation3"></p>
+<p>这种情况下，由于红框的限制，必然红框更左侧的w字符和更右侧的y字符不同；又由于绿框的限制，必然绿框更左侧的w字符和更右侧的v字符也不同。此时当前位置<code>i</code>的扩展情况是不确定的：</p>
+<p><code>str[1]!=str[7], str[1]!=str[11], str[7]=str[5], but we don&#39;t know str[5]=str[11]?</code>.</p>
+<p>此时只能断言<code>span[i]</code><strong>至少</strong>等于<code>mirror</code>，比如图中<code>??</code>指示的替换，<code>span[8]</code>完全可能等于3或者5。具体等于多少，需要继续使用中心扩展方法。</p>
+<p>至此，三种情况分析完毕，个人认为这是马拉车算法的核心原理。</p>
+<h2 id="实现步骤"><a href="#实现步骤" class="headerlink" title="实现步骤"></a>实现步骤</h2><h3 id="字符填充"><a href="#字符填充" class="headerlink" title="字符填充"></a>字符填充</h3><p>之前的讨论都假设回文子串满足奇数长度，如果再加上偶数长度情况就会非常麻烦。利用字符填充，可以直接回避偶数情况，填充方式如下：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">aacdedc --------&gt; @a@a@c@d@e@d@c@</span><br></pre></td></tr></table></figure>
+
+<p>这样就会发现，所有的回文情况全部变成了奇数长度情况。下面详细列出了填充前后的<code>span[]</code>值。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">before	a	a	c	d	e	d	c</span><br><span class="line">span[]	1	1	1	1	3	1	1	</span><br><span class="line">-----------------------------------</span><br><span class="line">after	@	a	@	a	@	c	@	d	@	e	@	d	@	c	@</span><br><span class="line">span[]	1	2	3	2	1	2	1	2	1	6	1	2	1	2	1</span><br></pre></td></tr></table></figure>
+
+<p>可见填充前后对应位置的<code>span[]</code>满足简单的二倍关系，且填充后的<code>span[i]-1</code>恰好等于以<code>i</code>位置为中心的最长回文字串长度！可谓一举多得了。</p>
+<h3 id="维护变量"><a href="#维护变量" class="headerlink" title="维护变量"></a>维护变量</h3><p>初始化<code>center=0, arm=1, span[]={1, 1, 1, ...}, reach=0</code>，在计算过程中需要维护这几个变量。根据前面对核心原理的分析，维护它们的规则是：</p>
+<ul>
+<li>当<code>i &gt;= reach</code>，没法利用回文字符串的对称性来减少重复计算，所以老老实实在<code>i</code>这个地方采用中心扩展方法求<code>span[i]</code>。当中心扩展方法结束后，以当前位置为中心的回文字符串必然能reach到更远的索引。此时要更新<code>center=i, arm=span[i], reach = center + arm - 1</code>。</li>
+<li>当<code>i &lt; reach</code>，根据之前的核心原理，可以利用对称性。此时<code>mirror=span[2 * center - i]</code>，对于之前所提到的情况一、情况二，计算得到的<code>reach</code>都不可能比当前的reach更远，所以不需要更新这几个变量。</li>
+<li>对于情况三，需要在对称性的基础上继续左右扩展求<code>span[i]</code>。由于<code>span[i]&gt;=mirror</code>，说明从这个位置扩展的<code>reach</code>比当前<code>reach</code>更远。此时要更新<code>center=i, arm=span[i], reach = center + arm - 1</code>。</li>
+</ul>
+<h3 id="往右遍历"><a href="#往右遍历" class="headerlink" title="往右遍历"></a>往右遍历</h3><p>对于填充之后的字符串，从第2个位置开始遍历到倒数第2个位置，求每个位置的<code>span[]</code>。因为首尾两个位置没必要判断，一定是1。遍历过程中维护变量<code>center， arm, reach</code>即可。</p>
+<p>如果需要求最长回文字串，只需记录最大的<code>span[]-1</code>作为结果。如果需要求回文子串的总数目，只需累加所有的<code>span[]/2</code>。</p>
+<h3 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h3><p>需要<code>span[]</code>数组来存储每个位置的扩展距离，空间复杂度为O(n)。时间复杂度分析稍微复杂，考虑前面提到的三种情况：</p>
+<ul>
+<li>情况一，<code>mirror + i - 1 &lt; reach</code>，当前位置可以“不劳而获”，得到<code>span[]</code>。</li>
+<li>情况二，<code>mirror + i - 1 &gt; reach</code>，当前位置也可以直接得到<code>span[]</code>。</li>
+<li>情况三，<code>mirror + i - 1 = reach</code>，当前位置需要使用中心扩展算法，从当前<code>reach</code>位置往后才开始遍历扩展，扩展的动作使得<code>reach</code>更新，也就使得后面更多的位置能够“不劳而获”。</li>
+</ul>
+<p>视线聚焦在每次使用中心扩展方法时，进行比较的右侧字符。会发现每次比较的右侧字符都不重复。所以时间复杂度为O(n)。</p>
+<h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><p>Q: 为什么随时都要保持<code>reach</code>最大？</p>
+<p>A: 这是希望随时都能最充分地利用对称性。只要当前<code>i</code>在<code>reach</code>管辖范围内，就能利用<code>mirror</code>减少计算。</p>
+<p>Q: 算法中还是用到了中心扩展方法，会不会导致复杂度和暴力遍历中心扩展方法差不多？</p>
+<p>A: 不会。每次迫不得已采用了中心扩展方法之后，扩展得越多，意味着能得到更大的<code>reach</code>，也就意味着后面几个位置能够“不劳而获”。事实上，字符串上的每个位置不可能被计算超过一次。</p>
+<h2 id="典型练习"><a href="#典型练习" class="headerlink" title="典型练习"></a>典型练习</h2><h3 id="leetcode-647-回文子串"><a href="#leetcode-647-回文子串" class="headerlink" title="leetcode  647. 回文子串"></a>leetcode  647. 回文子串</h3><p>给定一个字符串，你的任务是计算这个字符串中有多少个回文子串。</p>
+<p>具有不同开始位置或结束位置的子串，即使是由相同的字符组成，也会被视作不同的子串。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">示例 1：</span><br><span class="line">输入：&quot;abc&quot;</span><br><span class="line">输出：3</span><br><span class="line">解释：三个回文子串: &quot;a&quot;, &quot;b&quot;, &quot;c&quot;</span><br><span class="line"></span><br><span class="line">示例 2：</span><br><span class="line">输入：&quot;aaa&quot;</span><br><span class="line">输出：6</span><br><span class="line">解释：6个回文子串: &quot;a&quot;, &quot;a&quot;, &quot;a&quot;, &quot;aa&quot;, &quot;aa&quot;, &quot;aaa&quot;</span><br></pre></td></tr></table></figure>
+
+<p>提示： 输入的字符串长度不会超过 1000 。</p>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">countSubstrings</span><span class="params">(<span class="built_in">string</span> s)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> len = s.size();</span><br><span class="line">        <span class="keyword">if</span>(len &lt; <span class="number">2</span>) <span class="keyword">return</span> len;  <span class="comment">// 特殊情况处理</span></span><br><span class="line">        <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">        <span class="built_in">string</span> ss;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> &amp; ch : s) &#123;</span><br><span class="line">            ss += <span class="string">'@'</span>;</span><br><span class="line">            ss += ch;</span><br><span class="line">        &#125;</span><br><span class="line">        ss += <span class="string">'@'</span>;    <span class="comment">// 直接把 aaa 变成 @a@a@a@ , 处理起来没有什么影响</span></span><br><span class="line">        len = ss.size();  </span><br><span class="line">        <span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">span</span><span class="params">(len, <span class="number">1</span>)</span></span>;   <span class="comment">// span[] 用来存放每个位置的单向扩展长度</span></span><br><span class="line">                                    <span class="comment">// 比如：@a@a@a@ 的span[]=&#123;1,2,3,4,3,2,1&#125;</span></span><br><span class="line">        <span class="keyword">int</span> center = <span class="number">0</span>, arm = <span class="number">1</span>, mirro, reach;  <span class="comment">// center和arm是记录当前所处的轴心和臂长</span></span><br><span class="line">                                                <span class="comment">// reach是最远能够得着的索引</span></span><br><span class="line">                                                <span class="comment">// mirro是当前对应的镜像span</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; len - <span class="number">1</span>; i++) &#123;</span><br><span class="line">            reach = center + arm - <span class="number">1</span>;   <span class="comment">// 算出当前的reach</span></span><br><span class="line">            <span class="keyword">if</span>(i &gt;= reach) &#123;            <span class="comment">// 当前位置在reach边上或者超出了reach是没法利用镜像特性的</span></span><br><span class="line">                center = i; <span class="comment">// 下面3行更新center和arm，i处的span就等于arm</span></span><br><span class="line">                arm = <span class="number">1</span>;</span><br><span class="line">                <span class="keyword">while</span>(i &gt;= arm &amp;&amp; i + arm &lt; len &amp;&amp; ss[i - arm] == ss[i + arm]) ++arm;</span><br><span class="line">                span[i] = arm; </span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> &#123;                      <span class="comment">// 当前位置在对称性管辖以内，能利用镜像特性</span></span><br><span class="line">                mirro = span[(center &lt;&lt; <span class="number">1</span>) - i];    <span class="comment">// 先计算当前位置对应的镜像span</span></span><br><span class="line">                <span class="keyword">if</span>(i + mirro - <span class="number">1</span> &lt; reach) span[i] = mirro;  <span class="comment">// 这三个if乃是精髓，所有题解都有强调</span></span><br><span class="line">                <span class="keyword">else</span> <span class="keyword">if</span>(i + mirro - <span class="number">1</span> &gt; reach) span[i] = reach - i + <span class="number">1</span>;</span><br><span class="line">                <span class="keyword">else</span> &#123;</span><br><span class="line">                    center = i;</span><br><span class="line">                    arm = mirro;</span><br><span class="line">                    <span class="keyword">while</span>(i &gt;= arm &amp;&amp; i + arm &lt; len &amp;&amp; ss[i - arm] == ss[i + arm]) ++arm;</span><br><span class="line">                    span[i] = arm;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            ans += span[i] / <span class="number">2</span>; <span class="comment">// ans的增量和span具有直接关系</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">作者：luo-zhang-hui-xian</span><br><span class="line">链接：https:<span class="comment">//leetcode-cn.com/problems/palindromic-substrings/solution/ma-la-che-suan-fa-xiang-xi-zhu-shi-by-luo-zhang-hu/</span></span><br><span class="line">来源：力扣（LeetCode）</span><br><span class="line">著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="leetcode-5-最长回文子串"><a href="#leetcode-5-最长回文子串" class="headerlink" title="leetcode 5. 最长回文子串"></a>leetcode 5. 最长回文子串</h3><p>给定一个字符串 <code>s</code>，找到 <code>s</code> 中最长的回文子串。你可以假设 <code>s</code> 的最大长度为 1000。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">示例 1：</span><br><span class="line">输入: &quot;babad&quot;</span><br><span class="line">输出: &quot;bab&quot;</span><br><span class="line">注意: &quot;aba&quot; 也是一个有效答案。</span><br><span class="line"></span><br><span class="line">示例 2：</span><br><span class="line">输入: &quot;cbbd&quot;</span><br><span class="line">输出: &quot;bb&quot;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">CenterExpand</span><span class="params">(<span class="built_in">string</span> &amp;s,<span class="keyword">int</span> i,<span class="keyword">int</span> arm)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> len = s.size();</span><br><span class="line">        <span class="keyword">while</span>(i&gt;=arm&amp;&amp;i+arm&lt;len&amp;&amp;s[i-arm]==s[i+arm]) arm++;</span><br><span class="line">        <span class="keyword">return</span> arm;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="built_in">string</span> <span class="title">longestPalindrome</span><span class="params">(<span class="built_in">string</span> &amp;s)</span></span>&#123;</span><br><span class="line">        <span class="comment">//Manacher</span></span><br><span class="line">        <span class="keyword">if</span>(s.size()&lt;<span class="number">2</span>) <span class="keyword">return</span> s;</span><br><span class="line">        <span class="built_in">string</span> sstr = <span class="string">"@"</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">char</span> &amp;c:s)&#123;</span><br><span class="line">            sstr += c;</span><br><span class="line">            sstr += <span class="string">'@'</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> len = sstr.size();</span><br><span class="line">        <span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">p</span><span class="params">(len,<span class="number">1</span>)</span></span>;</span><br><span class="line">        <span class="keyword">int</span> mx = <span class="number">-1</span>, center = <span class="number">-1</span>;</span><br><span class="line">        <span class="keyword">int</span> cur_arm = <span class="number">1</span> , cur_maxi = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;len;i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(i&gt;=mx)&#123;</span><br><span class="line">                p[i] = CenterExpand(sstr,i,<span class="number">0</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(p[<span class="number">2</span>*center-i]+i!=mx)&#123;</span><br><span class="line">                p[i] = min(p[<span class="number">2</span>*center-i],mx-i);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span>&#123;</span><br><span class="line">                p[i] = CenterExpand(sstr,i,mx-i);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(p[i]&gt;cur_arm)&#123;</span><br><span class="line">                cur_arm = p[i];</span><br><span class="line">                cur_maxi = i;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(i+p[i]&gt;mx)&#123;</span><br><span class="line">                center = i;</span><br><span class="line">                mx = i+p[i];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> start = (cur_maxi+<span class="number">1</span>-cur_arm)/<span class="number">2</span>;</span><br><span class="line">        <span class="keyword">return</span> s.substr(start,cur_arm<span class="number">-1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+    
+
+	<!--版权信息-->
+
+
+  <div class="declare">
+    <strong>本文作者：</strong>
+    
+      PDZ
+    
+    <br>
+    <strong>本文链接：</strong>
+    https://piaodazhu.github.io/17-Manacher-Algorithm-and-leetcode/
+    <br>
+    <strong>版权声明：</strong>
+    本作品采用
+    <a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a>
+    进行许可。转载请注明出处！
+    
+  </div>
+
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">非原创</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">树</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">c++</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">c</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">code</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">字符串</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=https://piaodazhu.github.io/17-Manacher-Algorithm-and-leetcode/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/16-leetcode-the-Nth-ugly-number/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">leetcode题目：丑数</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#问题描述"><span class="toc-number">1.</span> <span class="toc-text">问题描述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#核心原理"><span class="toc-number">2.</span> <span class="toc-text">核心原理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#简单建模"><span class="toc-number">2.1.</span> <span class="toc-text">简单建模</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#情况一"><span class="toc-number">2.2.</span> <span class="toc-text">情况一</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#情况二"><span class="toc-number">2.3.</span> <span class="toc-text">情况二</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#情况三"><span class="toc-number">2.4.</span> <span class="toc-text">情况三</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实现步骤"><span class="toc-number">3.</span> <span class="toc-text">实现步骤</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#字符填充"><span class="toc-number">3.1.</span> <span class="toc-text">字符填充</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#维护变量"><span class="toc-number">3.2.</span> <span class="toc-text">维护变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#往右遍历"><span class="toc-number">3.3.</span> <span class="toc-text">往右遍历</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#复杂度分析"><span class="toc-number">3.4.</span> <span class="toc-text">复杂度分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#问题"><span class="toc-number">3.5.</span> <span class="toc-text">问题</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#典型练习"><span class="toc-number">4.</span> <span class="toc-text">典型练习</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#leetcode-647-回文子串"><span class="toc-number">4.1.</span> <span class="toc-text">leetcode  647. 回文子串</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#代码"><span class="toc-number">4.2.</span> <span class="toc-text">代码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#leetcode-5-最长回文子串"><span class="toc-number">4.3.</span> <span class="toc-text">leetcode 5. 最长回文子串</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#代码-1"><span class="toc-number">4.4.</span> <span class="toc-text">代码</span></a></li></ol></li></ol>
+                    </div>
+                </span>
+            </div>
+        </div>
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
 
+  
+
+  
 
 
           </div>
@@ -282,9 +526,9 @@
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: true,
 		toc_hide_index: false,
