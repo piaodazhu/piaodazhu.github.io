@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://piaodazhu.github.io/18-KMP-pattern-matching/</loc>
+    
+    <lastmod>2020-09-02T11:42:53.145Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://piaodazhu.github.io/17-Manacher-Algorithm-and-leetcode/</loc>
     
     <lastmod>2020-08-21T09:11:19.837Z</lastmod>
