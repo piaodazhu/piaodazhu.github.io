@@ -6,21 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://piaodazhu.github.io">
-  <title>进一步学习Makefile：源文件在多文件夹下的编译管理 | PDZ</title>
+  <title>MySQL基础操作（一） | PDZ</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="上一篇Makefile基础给出了Makefile的基本写法，在简单场景，即所有源文件和头文件都在同一个工作文件夹下，上文给出了Makefile编写示例。然而Makefile常常是为了管理复杂项目的编译过程，不可避免地要处理多文件夹的源文件结构。本文给出源文件在多文件夹下的Makefile编写示例。">
+  <meta name="description" content="MySQL是一套性能优秀、应用广泛的关系型数据库管理系统。本文是对MySQL基本操作的学习记录。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="进一步学习Makefile：源文件在多文件夹下的编译管理">
-<meta property="og:url" content="https://piaodazhu.github.io/7-Makefile-further/index.html">
+<meta property="og:title" content="MySQL基础操作（一）">
+<meta property="og:url" content="https://piaodazhu.github.io/21-MySQL-basic-1/index.html">
 <meta property="og:site_name" content="PDZ">
-<meta property="og:description" content="上一篇Makefile基础给出了Makefile的基本写法，在简单场景，即所有源文件和头文件都在同一个工作文件夹下，上文给出了Makefile编写示例。然而Makefile常常是为了管理复杂项目的编译过程，不可避免地要处理多文件夹的源文件结构。本文给出源文件在多文件夹下的Makefile编写示例。">
+<meta property="og:description" content="MySQL是一套性能优秀、应用广泛的关系型数据库管理系统。本文是对MySQL基本操作的学习记录。">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-07-18T02:18:45.000Z">
-<meta property="article:modified_time" content="2020-07-18T02:21:59.038Z">
+<meta property="article:published_time" content="2020-10-01T15:00:00.000Z">
+<meta property="article:modified_time" content="2020-10-01T15:35:12.778Z">
 <meta property="article:author" content="PDZ">
-<meta property="article:tag" content="linux">
-<meta property="article:tag" content="c">
-<meta property="article:tag" content="Makefile">
+<meta property="article:tag" content="MySQL">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="PDZ" type="application/atom+xml">
@@ -157,20 +155,20 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-7-Makefile-further" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-21-MySQL-basic-1" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      进一步学习Makefile：源文件在多文件夹下的编译管理
+      MySQL基础操作（一）
     </h1>
   
 
         
-        <a href="/7-Makefile-further/" class="archive-article-date">
-  	<time datetime="2020-07-18T02:18:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-18</time>
+        <a href="/21-MySQL-basic-1/" class="archive-article-date">
+  	<time datetime="2020-10-01T15:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-01</time>
 </a>
 
         <!-- 开始添加字数统计-->
@@ -180,7 +178,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-keyboard-o"></i>
         <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">1.8k字</span>
+        <span class="post-count">672字</span>
       </span>
     </span>
 
@@ -189,7 +187,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-hourglass-half"></i>
         <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">7分</span>
+        <span class="post-count">2分</span>
       </span>
     </span>
 </div>
@@ -215,49 +213,75 @@
 
 
         <blockquote>
-<p>上一篇Makefile基础给出了Makefile的基本写法，在简单场景，即所有源文件和头文件都在同一个工作文件夹下，上文给出了Makefile编写示例。然而Makefile常常是为了管理复杂项目的编译过程，不可避免地要处理多文件夹的源文件结构。本文给出源文件在多文件夹下的Makefile编写示例。</p>
+<p>MySQL是一套性能优秀、应用广泛的关系型数据库管理系统。本文是对MySQL基本操作的学习记录。</p>
 </blockquote>
 <a id="more"></a>
 
-<h2 id="源文件"><a href="#源文件" class="headerlink" title="源文件"></a>源文件</h2><p>练习编写一个处理二叉树的c程序，包含主程序main.c，二叉树头文件binarytree.h，二叉树各种函数实现的c代码binarytree.c。工作文件夹为~/bintree/，其中头文件放在./include/下，.c文件放在./src/下，编译产生的目标文件放在./obj/下，依赖关系文件放在./dep/下，最终生成可执行文件main放在工作文件夹的根目录下。</p>
-<h3 id="文件结构"><a href="#文件结构" class="headerlink" title="文件结构"></a>文件结构</h3><p>初始结构如下：</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── dep</span><br><span class="line">├── include</span><br><span class="line">│   └── binarytree.h</span><br><span class="line">├── Makefile</span><br><span class="line">├── obj</span><br><span class="line">└── src</span><br><span class="line">    ├── binarytree.c</span><br><span class="line">    └── main.c</span><br><span class="line"></span><br><span class="line">4 directories, 4 files</span><br></pre></td></tr></table></figure>
+<h2 id="简单操作"><a href="#简单操作" class="headerlink" title="简单操作"></a>简单操作</h2><p>查询版本：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select version();</span><br></pre></td></tr></table></figure>
 
-<p>最终make的结果如下：</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── dep</span><br><span class="line">│   ├── binarytree.d</span><br><span class="line">│   └── main.d</span><br><span class="line">├── include</span><br><span class="line">│   └── binarytree.h</span><br><span class="line">├── main</span><br><span class="line">├── Makefile</span><br><span class="line">├── obj</span><br><span class="line">│   ├── binarytree.o</span><br><span class="line">│   └── main.o</span><br><span class="line">└── src</span><br><span class="line">    ├── binarytree.c</span><br><span class="line">    └── main.c</span><br><span class="line"></span><br><span class="line">4 directories, 9 files</span><br></pre></td></tr></table></figure>
+<p>用户登入：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql [-h &#123;hostname&#125; -p &#123;portnum&#125;] -u &#123;username&#125; -p &#123;password&#125;</span><br></pre></td></tr></table></figure>
 
-<h3 id="文件内容"><a href="#文件内容" class="headerlink" title="文件内容"></a>文件内容</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*main.c*/</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"binarytree.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">print_item</span><span class="params">(link p)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d\t"</span>, p-&gt;item);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">char</span> pre_seq[] = &#123;<span class="number">4</span>,<span class="number">2</span>,<span class="number">1</span>,<span class="number">3</span>,<span class="number">6</span>,<span class="number">5</span>,<span class="number">7</span>&#125;;</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">char</span> in_seq[] = &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>&#125;;</span><br><span class="line">    link root = init(pre_seq, in_seq, <span class="number">7</span>); </span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">"pre_order visit:"</span>);</span><br><span class="line">    pre_order(root, print_item);</span><br><span class="line">    <span class="built_in">putchar</span>(<span class="string">'\n'</span>);</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">"in_order visit:"</span>);</span><br><span class="line">    in_order(root, print_item);</span><br><span class="line">    <span class="built_in">putchar</span>(<span class="string">'\n'</span>);</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">"post_order visit:"</span>);</span><br><span class="line">    post_order(root, print_item);</span><br><span class="line">    <span class="built_in">putchar</span>(<span class="string">'\n'</span>);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"count=%d, depth=%d.\n"</span>, count(root), depth(root));</span><br><span class="line">    destroy(root);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>执行.sql脚本：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source &#123;filepath&#125;;</span><br></pre></td></tr></table></figure>
 
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*binarytree.c*/</span></span><br><span class="line">include &lt;stdlib.h&gt;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"binarytree.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAX(a,b) (((a)&gt;(b))?(a):(b))</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">static</span> link <span class="title">make_node</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">char</span> item)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    link p = <span class="built_in">malloc</span>(<span class="keyword">sizeof</span> *p);</span><br><span class="line">    p-&gt;item = item;</span><br><span class="line">    p-&gt;left = p-&gt;right = <span class="literal">NULL</span>;</span><br><span class="line">    <span class="keyword">return</span> p;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">free_node</span><span class="params">(link p)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">free</span>(p);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">link <span class="title">init</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">char</span> VLR[], <span class="keyword">unsigned</span> <span class="keyword">char</span> LVR[], <span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    link t;</span><br><span class="line">    <span class="keyword">int</span> k;</span><br><span class="line">    <span class="keyword">if</span>(n &lt;= <span class="number">0</span>) </span><br><span class="line">        <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">    <span class="keyword">for</span>(k = <span class="number">0</span>; VLR[<span class="number">0</span>] != LVR[k]; k++);</span><br><span class="line">    t = make_node(VLR[<span class="number">0</span>]);</span><br><span class="line">    t-&gt;left = init(VLR + <span class="number">1</span>, LVR, k); </span><br><span class="line">    t-&gt;right = init(VLR + <span class="number">1</span> + k, LVR + <span class="number">1</span> + k, n - k - <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">return</span> t;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">pre_order</span><span class="params">(link t, <span class="keyword">void</span> (*visit)(link))</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(!t) <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">    visit(t);</span><br><span class="line">    pre_order(t-&gt;left, visit);</span><br><span class="line">    pre_order(t-&gt;right, visit);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">in_order</span><span class="params">(link t, <span class="keyword">void</span> (*visit)(link))</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(!t) <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">    in_order(t-&gt;left, visit);</span><br><span class="line">    visit(t);</span><br><span class="line">    in_order(t-&gt;right, visit);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">post_order</span><span class="params">(link t, <span class="keyword">void</span> (*visit)(link))</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(!t) <span class="keyword">return</span>;</span><br><span class="line">    post_order(t-&gt;left, visit);</span><br><span class="line">    post_order(t-&gt;right, visit);</span><br><span class="line">    visit(t);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">count</span><span class="params">(link t)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(!t) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span> + count(t-&gt;left) + count(t-&gt;right);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">depth</span><span class="params">(link t)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> dl, dr;</span><br><span class="line">    <span class="keyword">if</span>(!t) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    dl = depth(t-&gt;left);</span><br><span class="line">    dr = depth(t-&gt;right);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span> + MAX(dl, dr);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">destroy</span><span class="params">(link t)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    post_order(t, free_node);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>列出全部数据库：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show databases;</span><br></pre></td></tr></table></figure>
 
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*binarytree.h*/</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> BINARYTREE_H</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> BINARYTREE_H</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">node</span> *<span class="title">link</span>;</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">node</span> &#123;</span></span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">char</span> item;</span><br><span class="line">    link left, right;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function">link <span class="title">init</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">char</span> VLR[], <span class="keyword">unsigned</span> <span class="keyword">char</span> LVR[], <span class="keyword">int</span> n)</span></span>; </span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">pre_order</span><span class="params">(link t, <span class="keyword">void</span> (*visit)(link))</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">in_order</span><span class="params">(link t, <span class="keyword">void</span> (*visit)(link))</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">post_order</span><span class="params">(link t, <span class="keyword">void</span> (*visit)(link))</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">count</span><span class="params">(link t)</span></span>; </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">depth</span><span class="params">(link t)</span></span>; </span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">destroy</span><span class="params">(link t)</span></span>; </span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br></pre></td></tr></table></figure>
+<p>进入某个数据库：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">use &#123;tablename&#125;;</span><br></pre></td></tr></table></figure>
 
-<h2 id="Makefile编写"><a href="#Makefile编写" class="headerlink" title="Makefile编写"></a>Makefile编写</h2><p>要编写管理该项目的Makefile，首先需要解决多文件的编译链接问题，然后需要注意源文件在不同的文件夹。在反复报错、修改、查资料之后，总算是对Makefile有了进一步的理解。下面的该项目的Makefile：</p>
-<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">all: main</span></span><br><span class="line"></span><br><span class="line"><span class="section">main: main.o binarytree.o</span></span><br><span class="line">	<span class="variable">$(CC)</span> ./obj/main.o ./obj/binarytree.o <span class="variable">$(CFLAGS)</span> -o main</span><br><span class="line"></span><br><span class="line"><span class="section">main.o: ./src/main.c ./include/binarytree.h</span></span><br><span class="line">    <span class="variable">$(CC)</span> -c ./src/main.c -Iinclude  <span class="variable">$(CFLAGS)</span> -o ./obj/main.o</span><br><span class="line"></span><br><span class="line"><span class="section">binarytree.o: ./src/binarytree.c ./include/binarytree.h</span></span><br><span class="line">    <span class="variable">$(CC)</span> -c ./src/binarytree.c -Iinclude <span class="variable">$(CFLAGS)</span> -o ./obj/binarytree.o</span><br><span class="line"></span><br><span class="line"><span class="section">clean:</span></span><br><span class="line">    -rm ./obj/*.o main</span><br><span class="line"></span><br><span class="line"><span class="meta"><span class="meta-keyword">.PHONY</span>: clean</span></span><br><span class="line"></span><br><span class="line"><span class="meta"><span class="meta-keyword">.PHONY</span>: clean</span></span><br><span class="line"></span><br><span class="line">sources = ./src/main.c ./src/binarytree.c</span><br><span class="line"><span class="keyword">include</span> $(sources:.c=.d)</span><br><span class="line"><span class="section">%.d: %.c </span></span><br><span class="line">    set -e; rm -f <span class="variable">$@</span>; \</span><br><span class="line">    <span class="variable">$(CC)</span> -MM <span class="variable">$(CPPFLAGS)</span> <span class="variable">$&lt;</span> -Iinclude &gt; <span class="variable">$@</span>.$$$$; \</span><br><span class="line">    sed 's,\(<span class="variable">$*</span>\)\.o[ :]*,\1.o <span class="variable">$@</span> : ,g' &lt; <span class="variable">$@</span>.$$$$ &gt; <span class="variable">$@</span>; \</span><br><span class="line">    rm -f <span class="variable">$@</span>.$$$$</span><br><span class="line">    mv <span class="variable">$@</span> ./dep/</span><br></pre></td></tr></table></figure>
+<p>列出数据库的所有表：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">show tables; # 列出当前所在数据库的表</span><br><span class="line">show tables from &#123;databasename&#125;; # 不一定是当前的了</span><br></pre></td></tr></table></figure>
 
-<p>上面Makefile由主要的编译链接规则all和清除规则clean组成，主要的纠结之处在于all下面的子规则的编写，下面总结本次学到的要点。</p>
-<h3 id="目标与条件"><a href="#目标与条件" class="headerlink" title="目标与条件"></a>目标与条件</h3><p>目标的名称和生成目标文件的名称可以不同，但条件和依赖目标的名称必须匹配。</p>
+<p>列出某个表的字段信息：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">desc &#123;tablename&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>创建一个表：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">create table &#123;tablename&#125;(</span><br><span class="line">	&#123;colname1&#125; coltype1,</span><br><span class="line">    &#123;colname2&#125; coltype2,</span><br><span class="line">    ...</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="DQL语句：select"><a href="#DQL语句：select" class="headerlink" title="DQL语句：select"></a>DQL语句：select</h2><h3 id="简单查询"><a href="#简单查询" class="headerlink" title="简单查询"></a>简单查询</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 基本格式</span><br><span class="line">select</span><br><span class="line">	&#123;list&#125;</span><br><span class="line">from</span><br><span class="line">	&#123;tablename&#125;;</span><br></pre></td></tr></table></figure>
+
 <blockquote>
-<p>比如 main 目标的条件是 main.o 和 binarytree.o 。所以接着就有以 main.o 和 binarytree.o 为目标的两条规则。尽管这两条规则生成的目标文件名称是和目标名称并不相同。(<em>前者带有路径</em>)</p>
+<ol>
+<li><code>list</code>可以是字段列表，也可以是常量或者表达式，或者函数。</li>
+<li>返回的结果是虚拟表格，是临时结果，并不真实存在。</li>
+</ol>
 </blockquote>
-<p>根据隐含模式，一条编译规则生成的<strong>目标文件</strong>xxx.o中的xxx应该来自于本规则的<strong>目标</strong>xxx。但由于本例子需要把生成的<strong>目标文件</strong>放进./obj/目录，所以在命令列表下需要用 -o ./obj/filename 指定以下。</p>
-<p>如果不指定，也可以进行如下改动，即把目标带上路径，然后用$@代表目标：</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">all: main</span><br><span class="line"></span><br><span class="line">main: ./obj/main.o ./obj/binarytree.o</span><br><span class="line">    $(CC) ./obj/main.o ./obj/binarytree.o $(CFLAGS) -o <span class="variable">$@</span></span><br><span class="line"></span><br><span class="line">./obj/main.o: ./src/main.c ./include/binarytree.h</span><br><span class="line">    $(CC) -c ./src/main.c -Iinclude  $(CFLAGS) -o <span class="variable">$@</span></span><br><span class="line">    </span><br><span class="line"></span><br><span class="line">./obj/binarytree.o: ./src/binarytree.c ./include/binarytree.h</span><br><span class="line">    $(CC) -c ./src/binarytree.c -Iinclude $(CFLAGS) -o <span class="variable">$@</span></span><br></pre></td></tr></table></figure>
+<p>下面是一些小功能：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"># 一对一取别名</span><br><span class="line">select</span><br><span class="line">	&#123;list&#125;</span><br><span class="line">as</span><br><span class="line">	&#123;aliase&#125;</span><br><span class="line">from </span><br><span class="line">	&#123;tablename&#125;;</span><br><span class="line">	</span><br><span class="line"># 多对多取别名</span><br><span class="line">select</span><br><span class="line">	&#123;field1&#125; &#123;aliase1&#125;, &#123;field2&#125; &#123;aliase2&#125;,&#123;field3&#125; &#123;aliase3&#125;</span><br><span class="line">from</span><br><span class="line">	&#123;tablename&#125;;</span><br><span class="line"></span><br><span class="line"># 字段拼接并取名称</span><br><span class="line">select </span><br><span class="line">	concat(&#123;field1&#125;,&#123;field2&#125;,...) as &#123;aliase&#125; # 不能直接用+，+只能作为数值运算符</span><br><span class="line">from</span><br><span class="line">	&#123;tablename&#125;;</span><br><span class="line"></span><br><span class="line"># 去除重复</span><br><span class="line">select distinct</span><br><span class="line">	&#123;field&#125;</span><br><span class="line">from</span><br><span class="line">	&#123;tablename&#125;;</span><br></pre></td></tr></table></figure>
 
-<p>但是<strong>不能省略 -o $@，否则自动生成的目标文件不会带有目录，故不会进入./obj/下！</strong></p>
-<h3 id="头文件"><a href="#头文件" class="headerlink" title="头文件"></a>头文件</h3><p>编译和链接时，需要加上和头文件有关的选项 -I{头文件目录} ，否则编译器找不到头文件就会报错，说一些函数和变量没有声明。除了加上 [-I] 选项，还有一种方法就是在源文件的 #include &quot;xxx.h” 中给头文件带上路径，比如 #include “include/binarytree.h” ，这样就不需要指定 [-I] 选项了。</p>
-<h3 id="c与-o"><a href="#c与-o" class="headerlink" title="-c与-o"></a>-c与-o</h3><ul>
-<li>对于各个 .c 源文件，它本身仅仅是某个模块，或者对应头文件各种函数的实现，无法链接成完整的可执行程序，所需必须采用 [-c] 选项来告诉编译器：<strong>只编译而不链接。</strong>这些规则将会生成 xxx.o 这样的目标。</li>
-<li>对于最后把所有的 xxx.o 链接成可执行文件的一步，只需要 [-o] 选项即可，因为compile已经完成，只进行链接工作即可生成可执行文件。</li>
-<li>因为 -c 选项是单纯地编译而不链接，gcc -c 不允许输入文件个数多与输出文件个数，否则将会报错。如果不指定输出文件，则生成 .o 个数将等于输入文件个数(各自编译)，且处于和Makefile同文件夹下。</li>
-</ul>
-<h3 id="CFLAGS"><a href="#CFLAGS" class="headerlink" title="$(CFLAGS)"></a>$(CFLAGS)</h3><p>为了便于增加调试选项，可以在gcc编译链接命令中间加入一个变量${CFLAGS}，其默认是空，如果希望生成的可执行文件是可单步调试的，只需要：</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lzhx@lzhx-virtual-machine:~/cppprogram/tree/bintree$ make CFLAGS=-g</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>有的字段下的null值会影响效果，处理null的有关函数有：<code>ifnull({field},0), isnull({field})</code>。后面的<code>&lt;=&gt;,is null/is not null</code>也和null有关。</p>
+</blockquote>
+<h3 id="条件查询"><a href="#条件查询" class="headerlink" title="条件查询"></a>条件查询</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># 基本格式</span><br><span class="line">select </span><br><span class="line">	&#123;list&#125;</span><br><span class="line">from</span><br><span class="line">	&#123;tablename&#125;</span><br><span class="line">where</span><br><span class="line">	&#123;conditions&#125;;</span><br></pre></td></tr></table></figure>
 
-<p>如果直接make，则生成的可执行文件不可单步调试。</p>
-<h3 id="自动生成依赖"><a href="#自动生成依赖" class="headerlink" title="自动生成依赖"></a>自动生成依赖</h3><p>由于依赖文件要放入./dep/下，直接生成./dep/下的 .d 文件比较麻烦。因此可以考虑先在./src/文件夹下生成所需的依赖文件，最后移动到./dep/中。只需要将上一篇中的程序稍作修改即可。</p>
-<h2 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h2><p>作为Makefile初学者，这次小练习中面临的诸多问题虽然不是什么大难题，但是在解决这些问题的过程中，我学到了一些非常重要的要点。</p>
-<p>其实这些要点在看书的时候都看过，关键是为什么要加这个选项？如果换一种场景又该怎么写？这些问题实际上我在看书时是懒得思考的，到了动手实践的时候，才感叹书上写得太准确了。</p>
+<p><code>{conditons}</code>的结果应该是布尔值，可以是下列符号的结果：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;	&lt; 	= 	&lt;&gt; 	&gt;= 	&lt;=			<span class="comment"># 运算比较</span></span><br><span class="line">&amp;&amp;	||	!	and	or	not			<span class="comment"># 逻辑运算（前三后三等价，建议后三）</span></span><br><span class="line">like	between and	<span class="keyword">in</span>	is null			<span class="comment"># 模糊比较</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p> 其中模糊比较注意：</p>
+<ol>
+<li>like —-搭配通配符: %(任意多个字符) _(任意单个字符)  \(转义或escape指定转义)</li>
+<li>between and —-可以使语句简洁化，不可颠倒顺序</li>
+<li>in {list}—-可以使语句简洁化，后面的列表必须每个项都用单引号 ‘ ‘</li>
+<li>is null / is not null —- 处理空值。注意等号=无法判断null</li>
+<li>&lt;=&gt; —-安全等于，可以判断null的等于，可读性差，用得少</li>
+</ol>
+</blockquote>
+<h3 id="排序查询"><a href="#排序查询" class="headerlink" title="排序查询"></a>排序查询</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># 基本格式</span><br><span class="line">select </span><br><span class="line">	&#123;list&#125;</span><br><span class="line">from</span><br><span class="line">	&#123;tablename&#125;</span><br><span class="line">where</span><br><span class="line">	&#123;conditions&#125;</span><br><span class="line">order by</span><br><span class="line">	&#123;sortlist&#125; [asc|desc]; # asc表示升序 desc表示降序</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<ol>
+<li>{sortlist}支持使用前面as的别名</li>
+<li>{sortlist}也支持函数</li>
+<li>支持多重排序</li>
+</ol>
+</blockquote>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>上面这些功能用Excel都能做，所以不难理解。基本操作不足道也，MySQL到后面肯定是越学越难。</p>
 
     
 
@@ -271,7 +295,7 @@
     
     <br>
     <strong>本文链接：</strong>
-    https://piaodazhu.github.io/7-Makefile-further/
+    https://piaodazhu.github.io/21-MySQL-basic-1/
     <br>
     <strong>版权声明：</strong>
     本作品采用
@@ -291,15 +315,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">linux</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">c</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Makefile</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">MySQL</a>
         		</li>
       		
 		</ul>
@@ -355,7 +371,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://piaodazhu.github.io/7-Makefile-further/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=https://piaodazhu.github.io/21-MySQL-basic-1/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -369,18 +385,9 @@
   
 <nav id="article-nav">
   
-    <a href="/8-the-tree-processor-code/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          绝版程序源码：the tree processor
-        
-      </div>
-    </a>
   
-  
-    <a href="/6-Makefile-basic/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Makefile基础</div>
+    <a href="/20-Linux-cmd-1/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Linux基本操作命令（一）</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -407,7 +414,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#源文件"><span class="toc-number">1.</span> <span class="toc-text">源文件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#文件结构"><span class="toc-number">1.1.</span> <span class="toc-text">文件结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#文件内容"><span class="toc-number">1.2.</span> <span class="toc-text">文件内容</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Makefile编写"><span class="toc-number">2.</span> <span class="toc-text">Makefile编写</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#目标与条件"><span class="toc-number">2.1.</span> <span class="toc-text">目标与条件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#头文件"><span class="toc-number">2.2.</span> <span class="toc-text">头文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#c与-o"><span class="toc-number">2.3.</span> <span class="toc-text">-c与-o</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CFLAGS"><span class="toc-number">2.4.</span> <span class="toc-text">$(CFLAGS)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#自动生成依赖"><span class="toc-number">2.5.</span> <span class="toc-text">自动生成依赖</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#写在最后"><span class="toc-number">3.</span> <span class="toc-text">写在最后</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#简单操作"><span class="toc-number">1.</span> <span class="toc-text">简单操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DQL语句：select"><span class="toc-number">2.</span> <span class="toc-text">DQL语句：select</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#简单查询"><span class="toc-number">2.1.</span> <span class="toc-text">简单查询</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#条件查询"><span class="toc-number">2.2.</span> <span class="toc-text">条件查询</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#排序查询"><span class="toc-number">2.3.</span> <span class="toc-text">排序查询</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-number">3.</span> <span class="toc-text">总结</span></a></li></ol>
                     </div>
                 </span>
             </div>
