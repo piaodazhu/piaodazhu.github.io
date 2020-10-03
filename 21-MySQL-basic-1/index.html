@@ -15,8 +15,8 @@
 <meta property="og:site_name" content="PDZ">
 <meta property="og:description" content="MySQL是一套性能优秀、应用广泛的关系型数据库管理系统。本文是对MySQL基本操作的学习记录。">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-10-01T15:00:00.000Z">
-<meta property="article:modified_time" content="2020-10-01T15:35:12.778Z">
+<meta property="article:published_time" content="2020-10-03T15:00:00.000Z">
+<meta property="article:modified_time" content="2020-10-03T12:32:13.100Z">
 <meta property="article:author" content="PDZ">
 <meta property="article:tag" content="MySQL">
 <meta name="twitter:card" content="summary">
@@ -168,7 +168,7 @@
 
         
         <a href="/21-MySQL-basic-1/" class="archive-article-date">
-  	<time datetime="2020-10-01T15:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-01</time>
+  	<time datetime="2020-10-03T15:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-03</time>
 </a>
 
         <!-- 开始添加字数统计-->
@@ -178,7 +178,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-keyboard-o"></i>
         <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">672字</span>
+        <span class="post-count">1.3k字</span>
       </span>
     </span>
 
@@ -187,7 +187,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-hourglass-half"></i>
         <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">2分</span>
+        <span class="post-count">5分</span>
       </span>
     </span>
 </div>
@@ -238,8 +238,14 @@
 <p>列出某个表的字段信息：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">desc &#123;tablename&#125;;</span><br></pre></td></tr></table></figure>
 
+<p>创建一个数据库：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">create database databasename;</span><br></pre></td></tr></table></figure>
+
 <p>创建一个表：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">create table &#123;tablename&#125;(</span><br><span class="line">	&#123;colname1&#125; coltype1,</span><br><span class="line">    &#123;colname2&#125; coltype2,</span><br><span class="line">    ...</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p>删除一个表：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">drop table tablename;</span><br></pre></td></tr></table></figure>
 
 
 
@@ -281,6 +287,41 @@
 <li>支持多重排序</li>
 </ol>
 </blockquote>
+<h3 id="分组查询"><a href="#分组查询" class="headerlink" title="分组查询"></a>分组查询</h3><p>分组查询可以理解为以某个字段为分组依据，该字段值相同所有行作为一组，在组内运用各种统计方法。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"># 基本格式</span><br><span class="line">select 	</span><br><span class="line">	&#123;fieldname&#125;, group_function(&#123;fieldname1&#125;)</span><br><span class="line">from</span><br><span class="line">	&#123;tablename&#125;</span><br><span class="line">[where </span><br><span class="line">	&#123;condition&#125;]</span><br><span class="line">group by</span><br><span class="line">	group_by_expression</span><br><span class="line">[having</span><br><span class="line">	&#123;condition&#125;]</span><br><span class="line">order by</span><br><span class="line">	&#123;fieldname2&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>需要注意的是：</p>
+<ol>
+<li>分组前筛选的condition放在where，分组后筛选的condition放在having。</li>
+<li>支持使用别名。</li>
+</ol>
+<h3 id="常见函数"><a href="#常见函数" class="headerlink" title="常见函数"></a>常见函数</h3><p>常见函数主要分两类：单行函数（多用于处理），分组函数（多用于统计）。</p>
+<p>字符函数是一种单行函数，用于字符串处理。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">length(str) </span><br><span class="line">concat(str1,str2,...)	</span><br><span class="line">upper(str)		# 转大写</span><br><span class="line">lower(str)		# 转小写</span><br><span class="line">substr(str,pos)	</span><br><span class="line">substr(str,pos,len)	# 重载</span><br><span class="line">instr(str,substr)	# 返回字串位置</span><br><span class="line">trim(str) 		# 剪除两边空格</span><br><span class="line">trim(substr from str)	# 剪除两边目标字串</span><br><span class="line">lpad(str,len,substr)	# 左填充</span><br><span class="line">rpad(str,len,substr)	# 右填充</span><br><span class="line">replace(str,str1,str2)	# 替换</span><br></pre></td></tr></table></figure>
+
+<p>数学函数也是一种单行函数。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">round(x,D)	</span><br><span class="line">ceil(x)	</span><br><span class="line">floor(x)	</span><br><span class="line">truncate(x,D)</span><br><span class="line">mod(x1,x2)</span><br></pre></td></tr></table></figure>
+
+<p>日期函数也是一种单行函数，用于日期有关的计算。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">now()		# 当前日期</span><br><span class="line">curdate()	# 当前日</span><br><span class="line">curtime()	# 当前时间</span><br><span class="line">year(date)	# 提取日期类型中的年</span><br><span class="line">month(date)		# 提取日期中的月份</span><br><span class="line">monthname(date)	# 月份英语 	</span><br><span class="line">str_to_date(str,format)		# 类似于scanf()</span><br><span class="line">date_format(date, format)	# 类似于printf()</span><br></pre></td></tr></table></figure>
+
+<p>其他单行函数，用于返回一些基本信息。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">version()	</span><br><span class="line">database()	</span><br><span class="line">user()</span><br></pre></td></tr></table></figure>
+
+<p>流程控制函数，主要是分支语句。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">if(cond, x1, x2)	# if语句，cond满足返回x1，否则返回x2</span><br><span class="line"># 下面是case语句，有两种形式</span><br><span class="line"># 形式一：用于等值判断</span><br><span class="line">case list </span><br><span class="line">when cond1 then x1 </span><br><span class="line">when cond2 then x2 </span><br><span class="line">else x3 </span><br><span class="line">end</span><br><span class="line"># 形式二：用于条件判断</span><br><span class="line">case </span><br><span class="line">when cond1 then x1 </span><br><span class="line">when cond2 then x2 </span><br><span class="line">else x3 </span><br><span class="line">end</span><br></pre></td></tr></table></figure>
+
+<p>统计函数属于分组函数，主要有如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sum(list) </span><br><span class="line">avg(list) </span><br><span class="line">min(list) </span><br><span class="line">max(list) </span><br><span class="line">count(list)</span><br></pre></td></tr></table></figure>
+
+<p>统计函数需要注意的点是：</p>
+<ul>
+<li>注意参数的类型，字符串可以比大小，但无法求和求平均</li>
+<li>默认这些函数统计时是忽略null值的</li>
+<li>可以和<code>distinct</code>关键字搭配去重</li>
+<li>求行数的方法有<code>count(\*)、count(1)、count(const/_str)</code>。但建议<code>count(\*)</code>，效率最佳。</li>
+<li>和分组函数一同查询的字段要求是group by后的字段，否则行数不匹配。</li>
+</ul>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>上面这些功能用Excel都能做，所以不难理解。基本操作不足道也，MySQL到后面肯定是越学越难。</p>
 
     
@@ -414,7 +455,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#简单操作"><span class="toc-number">1.</span> <span class="toc-text">简单操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DQL语句：select"><span class="toc-number">2.</span> <span class="toc-text">DQL语句：select</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#简单查询"><span class="toc-number">2.1.</span> <span class="toc-text">简单查询</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#条件查询"><span class="toc-number">2.2.</span> <span class="toc-text">条件查询</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#排序查询"><span class="toc-number">2.3.</span> <span class="toc-text">排序查询</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-number">3.</span> <span class="toc-text">总结</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#简单操作"><span class="toc-number">1.</span> <span class="toc-text">简单操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DQL语句：select"><span class="toc-number">2.</span> <span class="toc-text">DQL语句：select</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#简单查询"><span class="toc-number">2.1.</span> <span class="toc-text">简单查询</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#条件查询"><span class="toc-number">2.2.</span> <span class="toc-text">条件查询</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#排序查询"><span class="toc-number">2.3.</span> <span class="toc-text">排序查询</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#分组查询"><span class="toc-number">2.4.</span> <span class="toc-text">分组查询</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#常见函数"><span class="toc-number">2.5.</span> <span class="toc-text">常见函数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-number">3.</span> <span class="toc-text">总结</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -584,6 +625,18 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">linux</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">ubuntu</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">非原创</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">leetcode</a>
               </li>
              
@@ -600,19 +653,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">linux</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">ubuntu</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">非原创</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">算法</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">字符串</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -620,7 +665,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">字符串</a>
+                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Trie</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">半原创</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -632,15 +685,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
+                <a href="javascript:void(0)" class="js-tag color4">Makefile</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">code</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Makefile</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -656,11 +705,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Trie</a>
+                <a href="javascript:void(0)" class="js-tag color1">debug</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">半原创</a>
+                <a href="javascript:void(0)" class="js-tag color4">gdb</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -673,14 +722,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">索引数组</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">debug</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">gdb</a>
               </li>
              
               <li class="article-tag-list-item">
