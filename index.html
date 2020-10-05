@@ -154,6 +154,427 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-22-Linux-cmd-2" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/22-Linux-cmd-2/">Linux基本操作命令（二）</a>
+    </h1>
+  
+
+        
+        <a href="/22-Linux-cmd-2/" class="archive-article-date">
+  	<time datetime="2020-10-05T15:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-05</time>
+</a>
+
+        <!-- 开始添加字数统计-->
+        
+          <div style="margin-top:10px;">
+    <span class="post-time">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-keyboard-o"></i>
+        <span class="post-meta-item-text">  字数统计: </span>
+        <span class="post-count">1.1k字</span>
+      </span>
+    </span>
+
+    <span class="post-time">
+      &nbsp; | &nbsp;
+      <span class="post-meta-item-icon">
+        <i class="fa fa-hourglass-half"></i>
+        <span class="post-meta-item-text">  阅读时长: </span>
+        <span class="post-count">4分</span>
+      </span>
+    </span>
+</div>
+
+
+          
+        <!-- 添加完成 -->
+
+        
+
+	
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+
+    
+        
+
+
+        <blockquote>
+<p>提要：vim、Bash、重定向、正则、管道、文本处理</p>
+</blockquote>
+<h2 id="流畅使用Vim"><a href="#流畅使用Vim" class="headerlink" title="流畅使用Vim"></a>流畅使用Vim</h2><p>光标移动：</p>
+<table>
+<thead>
+<tr>
+<th align="center">方向</th>
+<th align="center">快捷键</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">左</td>
+<td align="center">h</td>
+</tr>
+<tr>
+<td align="center">右</td>
+<td align="center">l</td>
+</tr>
+<tr>
+<td align="center">下</td>
+<td align="center">j</td>
+</tr>
+<tr>
+<td align="center">上</td>
+<td align="center">k</td>
+</tr>
+<tr>
+<td align="center">下一个单词</td>
+<td align="center">w</td>
+</tr>
+<tr>
+<td align="center">上一个单词</td>
+<td align="center">b</td>
+</tr>
+<tr>
+<td align="center">下一个句子</td>
+<td align="center">)</td>
+</tr>
+<tr>
+<td align="center">上一个句子</td>
+<td align="center">(</td>
+</tr>
+<tr>
+<td align="center">第一行</td>
+<td align="center">gg</td>
+</tr>
+<tr>
+<td align="center">最后一行</td>
+<td align="center">G</td>
+</tr>
+<tr>
+<td align="center">第N行</td>
+<td align="center">NG</td>
+</tr>
+<tr>
+<td align="center">行首</td>
+<td align="center">0</td>
+</tr>
+<tr>
+<td align="center">行尾</td>
+<td align="center">$</td>
+</tr>
+</tbody></table>
+<p>查找与替换：<code>/word    ?word    n    N    :%s/oldword/newword/g</code></p>
+<p>撤销与恢复：<code>u ctrl+r</code></p>
+<p>插入与删除：</p>
+<table>
+<thead>
+<tr>
+<th align="center">位置</th>
+<th align="center">快捷键</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">当前位置插入</td>
+<td align="center">i</td>
+</tr>
+<tr>
+<td align="center">下个位置插入</td>
+<td align="center">a</td>
+</tr>
+<tr>
+<td align="center">当前行下一行插入</td>
+<td align="center">o</td>
+</tr>
+<tr>
+<td align="center">当前行的上一行插入</td>
+<td align="center">O</td>
+</tr>
+<tr>
+<td align="center">删除字符[delete]</td>
+<td align="center">x</td>
+</tr>
+<tr>
+<td align="center">删除n个字符</td>
+<td align="center">nx</td>
+</tr>
+<tr>
+<td align="center">删除整行</td>
+<td align="center">dd</td>
+</tr>
+<tr>
+<td align="center">删除n行</td>
+<td align="center">ndd</td>
+</tr>
+</tbody></table>
+<p>复制粘贴：<code>yy    nyy    p    P</code></p>
+<h2 id="Bash的ctrl组合键"><a href="#Bash的ctrl组合键" class="headerlink" title="Bash的ctrl组合键"></a>Bash的ctrl组合键</h2><table>
+<thead>
+<tr>
+<th align="center">功能</th>
+<th align="center">快捷键</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">终止当前命令</td>
+<td align="center">ctrl + c</td>
+</tr>
+<tr>
+<td align="center">EOF</td>
+<td align="center">ctrl + d</td>
+</tr>
+<tr>
+<td align="center">锁定屏幕【危】</td>
+<td align="center">ctrl + s</td>
+</tr>
+<tr>
+<td align="center">解锁屏幕</td>
+<td align="center">ctrl + q</td>
+</tr>
+<tr>
+<td align="center">暂停目前命令【危】</td>
+<td align="center">ctrl + z</td>
+</tr>
+<tr>
+<td align="center">删除整列命令</td>
+<td align="center">ctrl + u</td>
+</tr>
+<tr>
+<td align="center">光标移动到命令首部</td>
+<td align="center">ctrl + a</td>
+</tr>
+<tr>
+<td align="center">光标移动到命令尾部</td>
+<td align="center">ctrl + e</td>
+</tr>
+</tbody></table>
+<h2 id="输入输出重定向"><a href="#输入输出重定向" class="headerlink" title="输入输出重定向"></a>输入输出重定向</h2><p>重定向主要是改变输入的方向或者输出的方向。比如cat，echo默认输出到屏幕，利用输出重定向则可以使内容输出到文件。cat的对象一般是文件，利用输入重定向同样可以来自屏幕。</p>
+<table>
+<thead>
+<tr>
+<th align="center"></th>
+<th align="center">覆盖</th>
+<th align="center">追加</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">输入重定向</td>
+<td align="center">&lt;</td>
+<td align="center">&lt;&lt;</td>
+</tr>
+<tr>
+<td align="center">输出重定向</td>
+<td align="center">&gt;</td>
+<td align="center">&gt;&gt;</td>
+</tr>
+</tbody></table>
+<p>三个重要的文件描述符：<code>stdio:0    stdout:1    stderr:2</code></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 例1、正确错误消息分类</span></span><br><span class="line"><span class="built_in">command</span> &gt; rightlog 2&gt; errlog</span><br><span class="line"><span class="comment"># 例2、不输出任何结果</span></span><br><span class="line"><span class="built_in">command</span> &amp;&gt; /dev/null</span><br><span class="line"><span class="comment"># 例3、保存所有结果</span></span><br><span class="line"><span class="built_in">command</span> &amp;&gt; all_log</span><br></pre></td></tr></table></figure>
+
+<h2 id="多命令的执行顺序"><a href="#多命令的执行顺序" class="headerlink" title="多命令的执行顺序"></a>多命令的执行顺序</h2><table>
+<thead>
+<tr>
+<th align="center">执行逻辑</th>
+<th align="center">符号</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">依次执行</td>
+<td align="center">;</td>
+</tr>
+<tr>
+<td align="center">执行成功才往后执行</td>
+<td align="center">&amp;&amp;</td>
+</tr>
+<tr>
+<td align="center">执行成功则结束，否则往后执行</td>
+<td align="center">||</td>
+</tr>
+</tbody></table>
+<h2 id="利用管道-及相关命令"><a href="#利用管道-及相关命令" class="headerlink" title="利用管道 | 及相关命令"></a>利用管道 | 及相关命令</h2><ul>
+<li><code>cut: -d divide -f field -c charnumber</code><ul>
+<li>用于信息切分。整齐信息用-c直接指定那些列的字元被切出；-d 和 -f 搭配使用，分割字段。</li>
+</ul>
+</li>
+<li><code>grep: -v not included  -c count  -i ignore case -n showline</code><ul>
+<li>用于信息抓取，可搭配正则表达式。</li>
+</ul>
+</li>
+<li><code>sort: -t devide -k field</code><ul>
+<li>按字段排序。</li>
+</ul>
+</li>
+<li><code>uniq: -c count -i ignore case</code><ul>
+<li>去重</li>
+</ul>
+</li>
+<li><code>wc: -l line -w word -m char</code><ul>
+<li>统计行数、词数、字符数</li>
+</ul>
+</li>
+<li><code>tee: -a append</code><ul>
+<li>不影响管道的继续，但复制流过的数据。</li>
+</ul>
+</li>
+<li><code>tr: -d delete -s replace</code><ul>
+<li>删除与替换</li>
+</ul>
+</li>
+<li><code>col: -x transform tab to space (the same like expand)</code><ul>
+<li>tab替换成等长度的空格</li>
+</ul>
+</li>
+<li><code>split: -b blocksize -l line PREFIX</code><ul>
+<li>大文件分割成小文件，指定PREFIX文件名前缀，自动生成aa、ab文件后缀</li>
+</ul>
+</li>
+<li><code>xargs: -n number of arg each time</code><ul>
+<li>把输入的字段以每次n个的数量给后面的命令去执行</li>
+<li>比如：ls a* | xargs -n 1 ls -l 。相当于对当前目录下以a开头的所有文件进行详细信息展示。</li>
+</ul>
+</li>
+<li><code>sed: -n silence -i editfile -r extended regix {a append i insert s substitude c row_substitude}</code><ul>
+<li>流编辑命令，支持增删改、替换、正则表达式。默认不改变原文件，可以指定改变。</li>
+</ul>
+</li>
+</ul>
+<h2 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h2><p>详见之前的文章：<a href="https://piaodazhu.github.io/9-Learning-regex/">C语言与正则表达式：基本用法与参数探究</a>。</p>
+<p><strong>BASIC Regix</strong>：<code>[] {} . * $ ^</code></p>
+<p><strong>EXTENDED Regix</strong>：<code>+ ? | () ()+</code></p>
+<p><strong>类似于cctype的简写规则</strong>：</p>
+<table>
+<thead>
+<tr>
+<th align="center">简写</th>
+<th align="center">规则</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">[:alnum:]</td>
+<td align="center">字母或数字</td>
+</tr>
+<tr>
+<td align="center">[:alpha:]</td>
+<td align="center">字母</td>
+</tr>
+<tr>
+<td align="center">[:digit:]</td>
+<td align="center">数字</td>
+</tr>
+<tr>
+<td align="center">[:graph:]</td>
+<td align="center">除了Space与Tab</td>
+</tr>
+<tr>
+<td align="center">[:punct:]</td>
+<td align="center">标点</td>
+</tr>
+<tr>
+<td align="center">[:lower:]</td>
+<td align="center">小写字母</td>
+</tr>
+<tr>
+<td align="center">[:upper:]</td>
+<td align="center">大写字母</td>
+</tr>
+<tr>
+<td align="center">[:space:]</td>
+<td align="center">Space、CR或者Tab</td>
+</tr>
+<tr>
+<td align="center">[:xdigit:]</td>
+<td align="center">16进制0-9，a-g，A-F</td>
+</tr>
+</tbody></table>
+<h2 id="awk流程控制"><a href="#awk流程控制" class="headerlink" title="awk流程控制"></a>awk流程控制</h2><h3 id="格式"><a href="#格式" class="headerlink" title="格式"></a>格式</h3><p><code>awk &#39;cond1{act1}cond2{act2}...&#39; filename</code></p>
+<h3 id="默认变量"><a href="#默认变量" class="headerlink" title="默认变量"></a>默认变量</h3><ul>
+<li>NF: 该行的字段数</li>
+<li>NR: 当前处理的行数</li>
+<li>FS: fragment symbol，分割符</li>
+<li>$0: content of this line，当前行的全部内容</li>
+<li>$1 $2 …: 1th 2th item of $0，当前行分割后的各个字段</li>
+</ul>
+<h3 id="cond-条件"><a href="#cond-条件" class="headerlink" title="cond 条件"></a>cond 条件</h3><ul>
+<li>利用<code>&lt; &gt; == &lt;= &gt;= !=</code>对变量进行条件判断</li>
+</ul>
+<p>BEGIN: 在读入参数前就强制执行该条件对应的action。</p>
+<h3 id="act-动作（也支持条件判断）"><a href="#act-动作（也支持条件判断）" class="headerlink" title="act 动作（也支持条件判断）"></a>act 动作（也支持条件判断）</h3><ul>
+<li>print：输出</li>
+<li>printf：格式化输出，同C语言</li>
+</ul>
+<h2 id="利用补丁进行文件更新"><a href="#利用补丁进行文件更新" class="headerlink" title="利用补丁进行文件更新"></a>利用补丁进行文件更新</h2><p>相似的文件之间可以比对，得到比对结果：</p>
+<p><code>diff file_from file_to</code></p>
+<p>用<strong>补丁</strong>格式将比对结果写入补丁文件，该文件记录了旧文件到新文件的变化：</p>
+<p><code>diff -Naur file_old file_new &gt; file.patch</code></p>
+<p>利用补丁文件，可以实现就文件的更新与版本回退：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$patch</span> -p0 f.patch   <span class="comment"># update</span></span><br><span class="line"><span class="variable">$patch</span> -R -p0 patch  <span class="comment"># recover</span></span><br></pre></td></tr></table></figure>
+
+
+    
+
+	<!--版权信息-->
+
+
+  <div class="declare" hidden="hidden"></div>
+
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Linux</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/22-Linux-cmd-2/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-21-MySQL-basic-1" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -317,6 +738,7 @@
     
         <blockquote>
 <p>操作Linux系统需要熟练运用命令行。由于命令太多，全部记住是不现实的。为此可以记忆一类操作对应的一类命令，以应付日常需要。即使不得不使用某个不常用的命令，也知道查阅哪个man page。近期看《鸟哥的Linux私房菜》，就在此做几篇简要记录，详细命令的功能在man page或者网上都可以查到。</p>
+<p>提要：基本信息、目录与文件、权限</p>
 </blockquote>
     
 
@@ -1205,121 +1627,6 @@
 
 
   
-    <article id="post-12-multi-thread-c-programing" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/12-multi-thread-c-programing/">Linux C：多线程编程基础</a>
-    </h1>
-  
-
-        
-        <a href="/12-multi-thread-c-programing/" class="archive-article-date">
-  	<time datetime="2020-07-31T15:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-31</time>
-</a>
-
-        <!-- 开始添加字数统计-->
-        
-          <div style="margin-top:10px;">
-    <span class="post-time">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-keyboard-o"></i>
-        <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">3.5k字</span>
-      </span>
-    </span>
-
-    <span class="post-time">
-      &nbsp; | &nbsp;
-      <span class="post-meta-item-icon">
-        <i class="fa fa-hourglass-half"></i>
-        <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">17分</span>
-      </span>
-    </span>
-</div>
-
-
-          
-        <!-- 添加完成 -->
-
-        
-
-	
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-
-    
-        <blockquote>
-<p>本文记录Linux C多线程编程的基础知识，并以此解决生产者-消费者问题和哲学家进餐两个经典问题。</p>
-</blockquote>
-    
-
-	<!--版权信息-->
-
-
-  <div class="declare" hidden="hidden"></div>
-
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">linux</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">c</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/12-multi-thread-c-programing/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next »</a>
@@ -1476,18 +1783,6 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">linux</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">ubuntu</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">非原创</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">leetcode</a>
               </li>
              
@@ -1504,15 +1799,27 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">linux</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">ubuntu</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">非原创</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">算法</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">字符串</a>
+                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
+                <a href="javascript:void(0)" class="js-tag color4">字符串</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1528,19 +1835,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">c</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Makefile</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">code</a>
+                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1553,6 +1848,18 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">科学上网</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">c</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Makefile</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">code</a>
               </li>
              
               <li class="article-tag-list-item">
