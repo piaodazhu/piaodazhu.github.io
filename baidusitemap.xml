@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://piaodazhu.github.io/24-Linux-cmd-3/</loc>
+    <lastmod>2020-10-09</lastmod>
+  </url>
+  <url>
     <loc>https://piaodazhu.github.io/23-MySQL-basic-2/</loc>
     <lastmod>2020-10-06</lastmod>
   </url>
